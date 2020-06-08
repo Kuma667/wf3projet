@@ -1,2 +1,10 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
+    form_themes: ['bootstrap_4_layout.html.twig']
+    globals:
+        moi: Cyril Rahmoun
+        PROJECT_NAME: ALSANNONCES
+        ADMIN_NAME: '%ADMIN_NAME%'
+        MY_EMAIL: '%MY_EMAIL%'
+        SOCIALS:
+            FB: https://facebook.com/maPageFb

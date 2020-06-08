@@ -4,6 +4,8 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    ADMIN_NAME: '%env(ADMIN_NAME)%'
+    MY_EMAIL: '%env(MY_EMAIL)%'
 
 services:
     # default configuration for services in *this* file
@@ -25,3 +27,6 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+#    App\Service\EmailService:
+#        arguments:
+#            $MY_EMAIL: '%MY_EMAIL%'
