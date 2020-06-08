@@ -70,7 +70,7 @@ class BaseController extends AbstractController
 
 
     /**
-     * @Route("/annonce-single", name="annonceSingle")
+     * @Route("/annonce-single-{id}", name="annonceSingle")
      */
      
     public function annonceSingle(Annonces $annonceSingle)

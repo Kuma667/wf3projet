@@ -11,6 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -26,17 +27,27 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
+            ->add('password', RepeatedType::class, [
+                // instead of being	 set onto the object directly,
                 // this is read and encoded in the controller
+				'type' => PasswordType::class,
+				'invalid_message' => "Les mots de passe ne sont pas identiques",
+				'first_options' => [
+					'label' => 'Mot de passe',
+					'empty_data' => ' ',
+				],
+				'second_options' => [
+					'label' => 'Confirmez le mot de passe',
+					'empty_data' => ' '
+				],
                 'mapped' => false,
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Veuillez entrer un mot de passe.',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Votre mot de passe doit comporter au moins {{ limit }} caractères',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
