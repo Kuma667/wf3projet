@@ -4,11 +4,16 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Annonces;
+use App\Entity\Historique;
+use App\Entity\User;
+use App\Form\AnnoncesType;
 
 class BaseController extends AbstractController
 {
     /**
-     * @Route("/index", name="accueil")
+     * @Route("/accueil", name="accueil")
      */
     public function index()
     {
@@ -19,27 +24,24 @@ class BaseController extends AbstractController
 
 
     /**
-     * @Route("/ajout-annonce", name="ajouAnnonce")
+     * @Route("/ajout-annonce", name="ajoutAnnonce")
      */
-    public function ajouAnnonce(
-        
-        ?annonce $annonce,
-        Request $request
-       
-    ) {
+    public function ajoutAnnonce(?Annonces $annonce, Request $request){
 
         $new = false;
         if (!$annonce) {
-            $annonce = new Annonce();
+            $annonce = new Annonces();
             $new = true;
         }
 
-        $form = $this->createForm(AnnonceType::class, $annonce);
+        $form = $this->createForm(AnnoncesType::class, $annonce);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) 
+        if ($form->isSubmitted() && $form->isValid()) {
+			
+		}
 
-        return $this->render('blog/ajoutAnnonce.html.twig', [
+        return $this->render('base/pages/ajoutAnnonce.html.twig', [
             'form' => $form->createView(),
             'new' => $new,
             'annonce' => $annonce,
@@ -56,6 +58,15 @@ class BaseController extends AbstractController
             'ROUTE_NAME' => $ROUTE_NAME,
         ]);
     }
+	
+	public function footer($ROUTE_NAME)
+    {
+        // REQUETE SQL
+
+        return $this->render('_partials/footer.html.twig', [
+            'ROUTE_NAME' => $ROUTE_NAME,
+        ]);
+    }
 
 
     /**
@@ -64,7 +75,7 @@ class BaseController extends AbstractController
      
     public function annonceSingle(Annonces $annonceSingle)
     {
-        return $this->render('pages/annonceSingle.html.twig', [
+        return $this->render('base/pages/annonceSingle.html.twig', [
             'annonces' => $annonces
         ]);
     }
@@ -77,6 +88,16 @@ class BaseController extends AbstractController
     {
         return $this->render('base/pages/annoncesListe.html.twig', [
             'annonces' => $AnnoncesRepository->findAll(),
+        ]);
+    }
+	
+	 /**
+     * @Route("/historique", name="historique")
+     */
+     
+    public function historique()
+    {
+        return $this->render('base/pages/historique.html.twig', [
         ]);
     }
 
