@@ -48,7 +48,7 @@ class BaseController extends AbstractController
 		}
 
         return $this->render('base/pages/ajoutAnnonce.html.twig', [
-            'form' => $form->createView(),
+            'annoncesForm' => $form->createView(),
             'new' => $new,
             'annonce' => $annonce,
         ]);

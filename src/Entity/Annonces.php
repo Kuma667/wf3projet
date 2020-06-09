@@ -67,7 +67,7 @@ class Annonces
     private $id_user;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="boolean")
      */
     private $premium = 0;
 
@@ -184,12 +184,12 @@ class Annonces
         return $this;
     }
 
-    public function getPremium(): ?int
+    public function getPremium(): ?bool
     {
         return $this->premium;
     }
 
-    public function setPremium(int $premium): self
+    public function setPremium(bool $premium): self
     {
         $this->premium = $premium;
 
