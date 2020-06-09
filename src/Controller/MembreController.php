@@ -12,8 +12,19 @@ class MembreController extends AbstractController
      */
     public function index()
     {
-        return $this->render('membre/index.html.twig', [
+        return $this->render('membre/membre.html.twig', [
             'controller_name' => 'MembreController',
+        ]);
+    }
+	
+	/**
+     * @Route("/membre/historique", name="historique")
+     */
+     
+    public function historique()
+    {
+        return $this->render('base/membre/historique.html.twig', [
+			
         ]);
     }
 }
