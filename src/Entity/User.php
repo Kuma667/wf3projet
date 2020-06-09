@@ -59,7 +59,7 @@ class User implements UserInterface
     private $createdAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=Annonces::class, mappedBy="id_user")
+     * @ORM\OneToMany(targetEntity=Annonces::class, mappedBy="user")
      */
     private $annonces;
 
@@ -241,5 +241,10 @@ class User implements UserInterface
         $this->isVerified = $isVerified;
 
         return $this;
+    }
+
+    public function getIsVerified(): ?bool
+    {
+        return $this->isVerified;
     }
 }
