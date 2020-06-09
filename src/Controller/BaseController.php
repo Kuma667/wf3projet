@@ -40,15 +40,17 @@ class BaseController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 			$file = $form['photo']->getData();
 			if($file){
-				$repertoire = $this->getParameter('uploadPhotos');
-				$nomDuDoc = 'photo-'.uniqid().'.'.$file->guessExtension();
+                $repertoire = $this->getParameter('uploadPhotos');
+                dd('file');
+                $nomDuDoc = 'photo-'.uniqid().'.'.$file->getClientOriginalExtension();
 				$file->move($repertoire, $nomDuDoc);
 				$annonce->setPhoto($nomDuDoc);
-			}
+            }
+            $em = $this->getDoctrine()->getManager();
 		}
 
         return $this->render('base/pages/ajoutAnnonce.html.twig', [
-            'form' => $form->createView(),
+            'annoncesForm' => $form->createView(),
             'new' => $new,
             'annonce' => $annonce,
         ]);
