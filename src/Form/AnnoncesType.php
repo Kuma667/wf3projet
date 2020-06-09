@@ -27,8 +27,7 @@ class AnnoncesType extends AbstractType
 					'Loisirs' => 2,
 					'Mode' => 3,
 					'Multimédia' => 4,
-					'Mobilier' => 5,
-					
+					'Mobilier' => 5,		
 				],
 			])
             ->add('photo', FileType::class,[
