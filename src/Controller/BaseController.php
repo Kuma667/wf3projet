@@ -9,6 +9,8 @@ use App\Entity\Annonces;
 use App\Entity\Historique;
 use App\Entity\User;
 use App\Form\AnnoncesType;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class BaseController extends AbstractController
 {
@@ -24,7 +26,7 @@ class BaseController extends AbstractController
 
 
     /**
-     * @Route("/ajout-annonce", name="ajoutAnnonce")
+     * @Route("/membre/ajout-annonce", name="ajoutAnnonce")
      */
     public function ajoutAnnonce(?Annonces $annonce, Request $request){
 
@@ -40,13 +42,19 @@ class BaseController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 			$file = $form['photo']->getData();
 			if($file){
-                $repertoire = $this->getParameter('uploadPhotos');
-                dd('file');
-                $nomDuDoc = 'photo-'.uniqid().'.'.$file->getClientOriginalExtension();
+				$repertoire = $this->getParameter('uploadPhotos');
+				//dd($file->getClientOriginalExtension());
+				$nomDuDoc = 'photo-'.uniqid().'.'.$file->getClientOriginalExtension();
 				$file->move($repertoire, $nomDuDoc);
 				$annonce->setPhoto($nomDuDoc);
-            }
-            $em = $this->getDoctrine()->getManager();
+			}
+			$em = $this->getDoctrine()->getManager();
+			$annonce->setUser($this->getUser());
+			$em->persist($annonce);
+			$em->flush();
+			$this->addFlash('success', 'L\'annonce a bien été ajoutée');
+			return $this->redirectToRoute('ajoutAnnonce');
+			return $this->redirect($request->getPathInfo());
 		}
 
         return $this->render('base/pages/ajoutAnnonce.html.twig', [
@@ -100,7 +108,7 @@ class BaseController extends AbstractController
     }
 	
 	 /**
-     * @Route("/historique", name="historique")
+     * @Route("/membre/historique", name="historique")
      */
      
     public function historique()

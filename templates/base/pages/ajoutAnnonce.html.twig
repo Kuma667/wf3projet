@@ -5,6 +5,7 @@
 {% block body %}
 	
 	<h1>Ajouter annonce</h1>
+	{% include '/_partials/flash.html.twig' %}
  {{ form_start(annoncesForm) }}
         {{ form_row(annoncesForm.titre) }}
         {{ form_row(annoncesForm.description) }}
@@ -13,7 +14,7 @@
         {{ form_row(annoncesForm.categorie) }}
         {{ form_row(annoncesForm.photo) }}
         {{ form_row(annoncesForm.premium) }}
-         <button type="submit" class="btn">Valider</button>
+	<button type="submit" class="btn">Valider</button>
 {{ form_end(annoncesForm) }}
 	
 {% endblock %}

@@ -53,18 +53,13 @@ class Annonces
     private $createdAt;
 	
 	public function __construct(){
-		$this->createdAt = new \DateTime();
-	}
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $relation;
+      		$this->createdAt = new \DateTime();
+      	}
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="annonces")
      */
-    private $id_user;
+    private $user;
 
     /**
      * @ORM\Column(type="boolean")
@@ -160,30 +155,6 @@ class Annonces
         return $this;
     }
 
-    public function getRelation(): ?string
-    {
-        return $this->relation;
-    }
-
-    public function setRelation(string $relation): self
-    {
-        $this->relation = $relation;
-
-        return $this;
-    }
-
-    public function getIdUser(): ?user
-    {
-        return $this->id_user;
-    }
-
-    public function setIdUser(?user $id_user): self
-    {
-        $this->id_user = $id_user;
-
-        return $this;
-    }
-
     public function getPremium(): ?bool
     {
         return $this->premium;
@@ -192,6 +163,18 @@ class Annonces
     public function setPremium(bool $premium): self
     {
         $this->premium = $premium;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
