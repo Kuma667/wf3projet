@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des annonces - Alsannonces{% endblock %}
+
+{% block body %}
+
+	{% for annonce in app.user.annonces %}
+		<p> {{ annonce.titre }} </p>
+	{% endfor %}
+{% endblock %}
