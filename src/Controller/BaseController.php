@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Annonces;
 use App\Entity\Historique;
 use App\Entity\User;
+use App\Repository\AnnoncesRepository;
 use App\Form\AnnoncesType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -20,7 +21,7 @@ class BaseController extends AbstractController
     public function index()
     {
         return $this->render('base/index.html.twig', [
-            
+          
         ]);
     }
 
@@ -86,13 +87,13 @@ class BaseController extends AbstractController
 
 
     /**
-     * @Route("/annonce-single-{id}", name="annonceSingle")
+     * @Route("/annonce-{id}", name="annonceSingle")
      */
      
-    public function annonceSingle(Annonces $annonceSingle)
+    public function annonceSingle(Annonces $annonce)
     {
         return $this->render('base/pages/annonceSingle.html.twig', [
-            'annonces' => $annonces
+            'annonce' => $annonce,
         ]);
     }
 
@@ -100,20 +101,20 @@ class BaseController extends AbstractController
       /**
      * @Route("/annonces-liste", name="annoncesListe")
      */
-    public function annonces_list(AnnoncesRepository $AnnoncesRepository)
+    public function annonces_list(AnnoncesRepository $annoncesRepository)
     {
         return $this->render('base/pages/annoncesListe.html.twig', [
-            'annonces' => $AnnoncesRepository->findAll(),
+            'annonces' => $annoncesRepository->findAll(),
         ]);
     }
 	
-	 /**
-     * @Route("/membre/historique", name="historique")
+	/**
+     * @Route("/annonces", name="annonces")
      */
-     
-    public function historique()
+    public function annonces(AnnoncesRepository $annoncesRepository)
     {
-        return $this->render('base/pages/historique.html.twig', [
+        return $this->render('base/pages/allAnnonces.html.twig', [
+            'annonces' => $annoncesRepository->findAll(),
         ]);
     }
 

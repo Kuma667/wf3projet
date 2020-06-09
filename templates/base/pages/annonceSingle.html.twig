@@ -6,4 +6,18 @@
 
 {% block body %}
 
+	<div class="row mt-5">
+		<div class="col-md-8">
+			<img class="img-fluid" style="max-width:300px" src="/uploads/photos/{{ annonce.photo }}">
+			<h3> {{ annonce.titre }} </h3>
+			<p class="lead"> {{ annonce.prix }}€</p>
+			<p class="lead"> {{ annonce.description }}</p>
+		</div>
+		<div class="col-md-4">
+			<p class="lead"> Vendeur : {{ annonce.user.prenom }}</p>
+			<a href="" class="btn btn-success mb-3">Faire une offre</a> <br>
+			<a href="" class="btn btn-info">Contacter le vendeur</a>
+		</div>
+	</div>
+	
 {% endblock %}
