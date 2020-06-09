@@ -16,4 +16,13 @@ class MembreController extends AbstractController
             'controller_name' => 'MembreController',
         ]);
     }
+
+    #$iduser = $this->getUser()->getId();
+    public function membresAnnoncesList(AnnoncesRepository $annoncesRepo)
+    {
+        if($iduser = $this->getUser()->getId())
+        {
+            $liste = $annoncesRepo->findAll(); 
+        }
+    }
 }
