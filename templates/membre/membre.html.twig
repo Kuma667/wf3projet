@@ -1,13 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Listing de vos annonces {{ app.user.username }} {{{% endblock %}
+{% block title %} {{ app.user.prenom }} voici vos annonces  
+{% endblock %}
 
 {% block body %}
+    {% for annonce in app.user.annonces %}
+        <h2>{{annonce.titre}}</h2>
+        <h2>{{annonce.description}}</h2>
+        <h2>{{annonce.prix}}</h2>
+        <h2>{{annonce.ville}}</h2>
+        <h2>{{annonce.categorie}}</h2>
+        <img class="img-fluid" style="max-width:300px" src="/uploads/photos/{{ annonce.photo }}">
+        <h2>{{annonce.premium}}</h2>
+        <a class="btn btn-warning" href="">Modifier</a>
+        <a class="btn btn-danger" href="">Supprimer</a>
+        
+    {% endfor %}
 
-<div class="example-wrapper">
-    s
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/symfony/wf3-projet/src/Controller/MembreController.php'|file_link(0) }}">src/Controller/MembreController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/symfony/wf3-projet/templates/membre/index.html.twig'|file_link(0) }}">templates/membre/index.html.twig</a></code></li>
-    </ul>
-</div>
 {% endblock %}

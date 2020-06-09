@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class MembreController extends AbstractController
 {
     /**
@@ -12,7 +13,7 @@ class MembreController extends AbstractController
      */
     public function index()
     {
-        return $this->render('membre/index.html.twig', [
+        return $this->render('membre/membre.html.twig', [
             'controller_name' => 'MembreController',
         ]);
     }
