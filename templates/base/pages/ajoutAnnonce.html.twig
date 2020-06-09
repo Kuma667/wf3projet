@@ -3,13 +3,16 @@
 {% block title %}Ajouter annonce{% endblock %}
 
 {% block body %}
-    <h1>Ajouter annonce</h1>
- {{ form_start(AnnoncesType) }}
-        {{ form_row(AnnoncesType.titre) }}
-        {{ form_row(AnnoncesType.description) }}
-        {{ form_row(AnnoncesType.prix) }}
-        {{ form_row(AnnoncesType.ville) }}
-        {{ form_row(AnnoncesType.categorie) }}
-        {{ form_row(AnnoncesType.photo) }}
-        {{ form_row(AnnoncesType.premuim) }}
+    
+        <h1>Ajouter annonce</h1>
+       
+                {{ form_start(AnnoncesType) }}
+                {{ form_row(AnnoncesType.titre) }}
+                {{ form_row(AnnoncesType.description) }}
+                {{ form_row(AnnoncesType.prix) }}
+                {{ form_row(AnnoncesType.ville) }}
+                {{ form_row(AnnoncesType.categorie) }}
+                {{ form_row(AnnoncesType.photo) }}
+                {{ form_row(AnnoncesType.premuim) }}
+    
 {% endblock %}
