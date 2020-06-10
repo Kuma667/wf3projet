@@ -12,11 +12,6 @@
 			 {% endfor %}
 			</select>
           <input type="text" class="form-control" placeholder="Search" name="search" value="{{ app.request.query.get('search') }}">
-			<select name="categorie">
-			 {% for ville in villes %}
-				 <option value="{{ ville.ville }}"> {{ ville.ville }}</option> 
-			 {% endfor %}
-			</select>
           <span class="input-group-btn">
             <button type="submit" class="btn btn-primary">Valider</button>
           </span>
