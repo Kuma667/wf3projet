@@ -12,7 +12,7 @@
         <h2>{{annonce.categorie.nom}}</h2>
         <img class="img-fluid" style="max-width:300px" src="/uploads/photos/{{ annonce.photo }}">
         <h2>{{annonce.premium}}</h2>
-        <a class="btn btn-warning" href="">Modifier</a>
+        <a class="btn btn-warning" href="{{ path('modifierAnnonce', { id:annonce.id} )}}">Modifier</a>
         <a class="btn btn-danger" href="">Supprimer</a>
         
     {% endfor %}
