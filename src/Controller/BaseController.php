@@ -118,5 +118,50 @@ class BaseController extends AbstractController
         ]);
     }
 
+
+    
+    /**
+     * @Route("/membre/modifier-annonce-{id}", name="modifierAnnonce")
+     */
+    public function modifierAnnonce(?Annonces $annonce, $id, Request $request){
+
+        $new = false;
+        if (!$annonce) {
+            $annonce = new Annonces();
+            $new = true;
+        }
+
+     //   $annonce = $this->getDoctrine()->getRepository(Annonce::class)->find($id);
+
+        $form = $this->createForm(AnnoncesType::class, $annonce);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+			$file = $form['photo']->getData();
+			if($file){
+				$repertoire = $this->getParameter('uploadPhotos');
+				//dd($file->getClientOriginalExtension());
+				$nomDuDoc = 'photo-'.uniqid().'.'.$file->getClientOriginalExtension();
+				$file->move($repertoire, $nomDuDoc);
+				$annonce->setPhoto($nomDuDoc);
+			}
+			$em = $this->getDoctrine()->getManager();
+			$annonce->setUser($this->getUser());
+			$em->flush();
+			$this->addFlash('success', 'L\'annonce a bien été modifié');
+			
+			return $this->redirect($request->getPathInfo());
+		}
+
+        return $this->render('/base/pages/modifierAnnonce.html.twig', [
+            'annoncesForm' => $form->createView(),
+            'new' => $new,
+            'annonce' => $annonce,
+        ]);
+    }
+    
+
+
+
      
 }
