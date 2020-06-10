@@ -6,10 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Annonces;
+use App\Entity\images;
+use App\Repository\ImagesRepository;
 use App\Entity\Historique;
 use App\Entity\User;
 use App\Repository\AnnoncesRepository;
 use App\Form\AnnoncesType;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -29,39 +32,44 @@ class BaseController extends AbstractController
     /**
      * @Route("/membre/ajout-annonce", name="ajoutAnnonce")
      */
-    public function ajoutAnnonce(?Annonces $annonce, Request $request){
-
-        $new = false;
-        if (!$annonce) {
-            $annonce = new Annonces();
-            $new = true;
-        }
-
+    public function ajoutAnnonce(?Annonces $annonce, Request $request): Response
+    {
+        $annonce = new Annonces();
         $form = $this->createForm(AnnoncesType::class, $annonce);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-			$file = $form['photo']->getData();
-			if($file){
-				$repertoire = $this->getParameter('uploadPhotos');
-				//dd($file->getClientOriginalExtension());
-				$nomDuDoc = 'photo-'.uniqid().'.'.$file->getClientOriginalExtension();
-				$file->move($repertoire, $nomDuDoc);
-				$annonce->setPhoto($nomDuDoc);
-			}
+
+        //recupère image
+            $images = $form->get('images')->getData();
+
+
+        foreach($images as $image){
+            $fichier = md5(uniqid()).'.'. $image->guessExtension();
+
+            $image->move(
+                $this->getParameter('images_directory'),
+                $fichier
+            );
+
+            $img = new Images();
+            $img->setName($fichier);
+            $annonce->addImage($img);
+            
+         }
+		
 			$em = $this->getDoctrine()->getManager();
 			$annonce->setUser($this->getUser());
 			$em->persist($annonce);
 			$em->flush();
 			$this->addFlash('success', 'L\'annonce a bien été ajoutée');
 			return $this->redirectToRoute('ajoutAnnonce');
-			return $this->redirect($request->getPathInfo());
+		//	return $this->redirect($request->getPathInfo());
 		}
 
         return $this->render('base/pages/ajoutAnnonce.html.twig', [
             'annoncesForm' => $form->createView(),
-            'new' => $new,
-            'annonce' => $annonce,
+            'annonce' => $annonce
         ]);
     }
 
@@ -120,44 +128,57 @@ class BaseController extends AbstractController
 
 
     
+
+
+
+    
     /**
      * @Route("/membre/modifier-annonce-{id}", name="modifierAnnonce")
      */
-    public function modifierAnnonce(?Annonces $annonce, $id, Request $request){
-
+    public function modifierAnnonce(?Annonces $annonce, $id, Request $request): Response
+    {
         $new = false;
         if (!$annonce) {
             $annonce = new Annonces();
             $new = true;
         }
-
-     //   $annonce = $this->getDoctrine()->getRepository(Annonce::class)->find($id);
-
         $form = $this->createForm(AnnoncesType::class, $annonce);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-			$file = $form['photo']->getData();
-			if($file){
-				$repertoire = $this->getParameter('uploadPhotos');
-				//dd($file->getClientOriginalExtension());
-				$nomDuDoc = 'photo-'.uniqid().'.'.$file->getClientOriginalExtension();
-				$file->move($repertoire, $nomDuDoc);
-				$annonce->setPhoto($nomDuDoc);
-			}
-			$em = $this->getDoctrine()->getManager();
+
+        //recupère image
+            $images = $form->get('images')->getData();
+
+
+        foreach($images as $image){
+            $fichier = md5(uniqid()).'.'. $image->guessExtension();
+
+            $image->move(
+                $this->getParameter('images_directory'),
+                $fichier
+            );
+
+            $img = new Images();
+            $img->setName($fichier);
+            $annonce->addImage($img);
+        }
+        
+        $em = $this->getDoctrine()->getManager();
 			$annonce->setUser($this->getUser());
+			$em->persist($annonce);
 			$em->flush();
-			$this->addFlash('success', 'L\'annonce a bien été modifié');
-			
+			$this->addFlash('success', 'L\'annonce a bien été ajoutée');
+		//	return $this->redirectToRoute('modifierAnnonce');
 			return $this->redirect($request->getPathInfo());
 		}
 
-        return $this->render('/base/pages/modifierAnnonce.html.twig', [
+        return $this->render('base/pages/modifierAnnonce.html.twig', [
             'annoncesForm' => $form->createView(),
-            'new' => $new,
             'annonce' => $annonce,
+            'new' => $new
         ]);
+    
     }
     
 

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AnnoncesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,19 +44,16 @@ class Annonces
      */
     private $categorie;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $photo;
-
+    
     /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
 	
 	public function __construct(){
-      		$this->createdAt = new \DateTime();
-      	}
+                           		$this->createdAt = new \DateTime();
+                             $this->images = new ArrayCollection();
+                           	}
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="annonces")
@@ -65,6 +64,11 @@ class Annonces
      * @ORM\Column(type="boolean")
      */
     private $premium = 0;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Images::class, mappedBy="annonces", orphanRemoval=true, cascade={"persist"})
+     */
+    private $images;
 
     public function getId(): ?int
     {
@@ -131,17 +135,7 @@ class Annonces
         return $this;
     }
 
-    public function getPhoto(): ?string
-    {
-        return $this->photo;
-    }
-
-    public function setPhoto(string $photo): self
-    {
-        $this->photo = $photo;
-
-        return $this;
-    }
+  
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
@@ -175,6 +169,37 @@ class Annonces
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Images[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Images $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setAnnonces($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Images $image): self
+    {
+        if ($this->images->contains($image)) {
+            $this->images->removeElement($image);
+            // set the owning side to null (unless already changed)
+            if ($image->getAnnonces() === $this) {
+                $image->setAnnonces(null);
+            }
+        }
 
         return $this;
     }

@@ -30,10 +30,11 @@ class AnnoncesType extends AbstractType
 					'Mobilier' => 5,		
 				],
 			])
-            ->add('photo', FileType::class,[
-				'required' => true,
-				'label' => 'Photo',
-				'mapped' => false
+            ->add('images', FileType::class,[
+				'required' => false,
+				'label' => false,
+                'mapped' => false,
+                'multiple' => true 
 			])
             ->add('premium', CheckboxType::class, [
 				'label' => 'Passer le produit en premium (5 photos, produit mis en avant)',

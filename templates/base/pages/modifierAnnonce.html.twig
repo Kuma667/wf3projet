@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajouter annonce{% endblock %}
+{% block title %}Modifier annonce{% endblock %}
 
 {% block body %}
 	
-	<h1>Ajouter annonce</h1>
+	<h1>Modifier annonce</h1>
 	{% include '/_partials/flash.html.twig' %}
  {{ form_start(annoncesForm) }}
         {{ form_row(annoncesForm.titre) }}
@@ -12,7 +12,10 @@
         {{ form_row(annoncesForm.prix) }}
         {{ form_row(annoncesForm.ville) }}
         {{ form_row(annoncesForm.categorie) }}
-        {{ form_row(annoncesForm.photo) }}
+        {{ form_row(annoncesForm.images) }}
+          {% for image in annonce.images %}
+	        <img class="img-fluid" style="max-width:200px" src="{{ asset('uploads/photos/' ~ image.name) }}">
+	{% endfor %}
         {{ form_row(annoncesForm.premium) }}
 	<button type="submit" class="btn">Valider</button>
 {{ form_end(annoncesForm) }}

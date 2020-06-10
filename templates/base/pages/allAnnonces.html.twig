@@ -10,7 +10,13 @@
 					{% for annonce in annonces %}
 						<div class="row mb-3">
 							<div class="col-md-4">
-								<img class="img-fluid" style="max-width:200px" src="/uploads/photos/{{ annonce.photo }}">
+							{# {% for image in annonce.images %}
+								<img class="img-fluid" style="max-width:300px" src="{{ asset('uploads/photos/' ~{{ image.name }}">	</br>
+							{% endfor %} #}
+							{% if annonce.images.first %}
+								<img class="img-fluid" style="max-width:300px" src="{{ asset('uploads/photos/' ~ annonce.images.first.name) }}">
+							{% endif %}
+
 							</div>
 							<div class="col-md-8">
 								<h3><a href="{{ path('annonceSingle', {id: annonce.id}) }}"> {{ annonce.titre }} </a> </h3>

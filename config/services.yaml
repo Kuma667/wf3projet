@@ -6,7 +6,7 @@
 parameters:
     ADMIN_NAME: '%env(ADMIN_NAME)%'
     MY_EMAIL: '%env(MY_EMAIL)%'
-    uploadPhotos: '%kernel.project_dir%/public/uploads/photos'
+    images_directory: '%kernel.project_dir%/public/uploads/photos'
 
 services:
     # default configuration for services in *this* file
