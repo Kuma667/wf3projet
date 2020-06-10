@@ -3,8 +3,18 @@
 {% block title %}Gestion des annonces - Alsannonces{% endblock %}
 
 {% block body %}
+    {% for annonce in app.user.annonces %}
+		
+        <h2>{{annonce.titre}}</h2>
+        <h2>{{annonce.description}}</h2>
+        <h2>{{annonce.prix}}</h2>
+        <h2>{{annonce.ville}}</h2>
+        <h2>{{annonce.categorie.nom}}</h2>
+        <img class="img-fluid" style="max-width:300px" src="/uploads/photos/{{ annonce.photo }}">
+        <h2>{{annonce.premium}}</h2>
+        <a class="btn btn-warning" href="{{ path('annonceModifier', { id:annonce.id} )}}">Modifier</a>
+        <a class="btn btn-danger" href="{{ path('annonceSupprimer', { id:annonce.id} )}}">Supprimer</a>
+        
+    {% endfor %}
 
-	{% for annonce in app.user.annonces %}
-		<p> {{ annonce.titre }} </p>
-	{% endfor %}
 {% endblock %}
