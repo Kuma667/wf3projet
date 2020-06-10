@@ -40,7 +40,8 @@ class Annonces
     private $ville;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity=Categories::class, inversedBy="annonces")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $categorie;
 
@@ -123,12 +124,12 @@ class Annonces
         return $this;
     }
 
-    public function getCategorie(): ?string
+    public function getCategorie(): ?Categorie
     {
         return $this->categorie;
     }
 
-    public function setCategorie(string $categorie): self
+    public function setCategorie(Categorie $categorie): self
     {
         $this->categorie = $categorie;
 
