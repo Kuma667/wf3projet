@@ -71,7 +71,7 @@ class MembreController extends AbstractController
 			return $this->redirect($request->getPathInfo());
 		}
 
-        return $this->render('base/pages/ajoutAnnonce.html.twig', [
+        return $this->render('membre/ajoutAnnonce.html.twig', [
             'annoncesForm' => $form->createView(),
             'new' => $new,
             'annonce' => $annonce,
@@ -111,7 +111,7 @@ class MembreController extends AbstractController
 			return $this->redirect($request->getPathInfo());
 		}
 
-        return $this->render('/base/pages/modifierAnnonce.html.twig', [
+        return $this->render('/membre/modifierAnnonce.html.twig', [
             'annoncesForm' => $form->createView(),
             'new' => $new,
             'annonce' => $annonce,
@@ -129,7 +129,7 @@ class MembreController extends AbstractController
             $em->flush();
         }
         return $this->redirectToRoute('membre');
-        return $this->render('base/membre/annonceSupprimer.html.twig', [
+        return $this->render('/membre/annonceSupprimer.html.twig', [
         ]);
     }
 }

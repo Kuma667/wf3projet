@@ -8,7 +8,7 @@
 
 	<div class="row mt-5">
 		<div class="col-md-8">
-			<img class="img-fluid" style="max-width:300px" src="/uploads/photos/{{ annonce.photo }}">
+			<img class="img-fluid" style="max-width:300px" src="{{ asset('uploads/photos/' ~ annonce.photo) }}">
 			<h3> {{ annonce.titre }} </h3>
 			<p class="lead"> {{ annonce.prix }}€</p>
 			<p class="lead"> {{ annonce.description }}</p>
