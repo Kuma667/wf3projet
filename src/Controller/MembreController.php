@@ -91,17 +91,10 @@ class MembreController extends AbstractController
     }
     
 	
-<<<<<<< HEAD
-	 /**
-     * @Route("/membre/modifier-annonce-{id}", name="annonceModifier")
-     */
-    public function modifierAnnonce(?Annonces $annonce, $id, Request $request){
-=======
 	/**
     * @Route("/membre/modifier-annonce-{id}", name="annonceModifier")
     */
     public function modifierAnnonce(?Annonces $annonce, $id, Request $request): Response {
->>>>>>> b05575b653839f5f6e3e2893ff43ee9cd628637d
 
         $new = false;
         if (!$annonce) {
