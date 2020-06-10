@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class MembreController extends AbstractController
 {
     /**
@@ -26,5 +27,13 @@ class MembreController extends AbstractController
         return $this->render('base/membre/historique.html.twig', [
 			
         ]);
+
+    #$iduser = $this->getUser()->getId();
+    public function membresAnnoncesList(AnnoncesRepository $annoncesRepo)
+    {
+        if($iduser = $this->getUser()->getId())
+        {
+            $liste = $annoncesRepo->findAll(); 
+        }
     }
 }
