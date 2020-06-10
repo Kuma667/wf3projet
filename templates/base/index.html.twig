@@ -4,6 +4,23 @@
 
 {% block body %}
 	
-	<h1>Test accueil</h1>
+	<form class="pull-right hidden" role="search" id="nav-search-form" method="GET" action="{{ path('searchResult') }}">
+        <div class="input-group">
+			<select name="categorie">
+			 {% for cat in cats %}
+				 <option value="{{ cat.slug }}"> {{ cat.nom }}</option> 
+			 {% endfor %}
+			</select>
+          <input type="text" class="form-control" placeholder="Search" name="search" value="{{ app.request.query.get('search') }}">
+			<select name="categorie">
+			 {% for ville in villes %}
+				 <option value="{{ ville.ville }}"> {{ ville.ville }}</option> 
+			 {% endfor %}
+			</select>
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-primary">Valider</button>
+          </span>
+        </div>
+      </form>
 
 {% endblock %}

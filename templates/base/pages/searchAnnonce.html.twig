@@ -1,0 +1,37 @@
+{# AFFICHAGE RECHERCHE ANNONCES #}
+
+{% extends "base.html.twig" %}
+
+{% block title %}Recherche - Alsannonces{% endblock %}
+
+{% block body %}
+
+	<form class="pull-right hidden" role="search" id="nav-search-form" method="GET" action="">
+        <div class="input-group">
+			<select name="categorie">
+			 {% for cat in cats %}
+				 <option value="{{ cat.slug }}"> {{ cat.nom }}</option> 
+			 {% endfor %}
+			</select>
+          <input type="text" class="form-control" placeholder="Search" name="search" value="{{ app.request.query.get('search') }}">
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-primary">Valider</button>
+          </span>
+        </div>
+      </form>
+	
+	
+		<h2>TEST SEARCH RESULT</h2>
+		{% for annonce in res %}
+			<div class="row">
+				<div class="col-md-12">
+					<p class="lead">{{ annonce.titre }}</p>
+					<p class="lead">{{ annonce.prix }}</p>
+					<img class="img-fluid" style="max-width:300px" src="/uploads/photos/{{ annonce.photo }}">
+				</div>
+			
+			</div>
+		{% endfor %}
+	
+	
+{% endblock %}

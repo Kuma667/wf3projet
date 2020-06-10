@@ -40,11 +40,6 @@ class Annonces
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $categorie;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $photo;
 
     /**
@@ -53,8 +48,8 @@ class Annonces
     private $createdAt;
 	
 	public function __construct(){
-      		$this->createdAt = new \DateTime();
-      	}
+               		$this->createdAt = new \DateTime();
+               	}
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="annonces")
@@ -65,6 +60,12 @@ class Annonces
      * @ORM\Column(type="boolean")
      */
     private $premium = 0;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Categories::class, inversedBy="annonces")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $categorie;
 
     public function getId(): ?int
     {
@@ -119,18 +120,6 @@ class Annonces
         return $this;
     }
 
-    public function getCategorie(): ?string
-    {
-        return $this->categorie;
-    }
-
-    public function setCategorie(string $categorie): self
-    {
-        $this->categorie = $categorie;
-
-        return $this;
-    }
-
     public function getPhoto(): ?string
     {
         return $this->photo;
@@ -175,6 +164,18 @@ class Annonces
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categories
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categories $categorie): self
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }
