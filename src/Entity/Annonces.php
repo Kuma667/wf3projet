@@ -44,7 +44,6 @@ class Annonces
      * @ORM\JoinColumn(nullable=false)
      */
     private $categorie;
-
     
     /**
      * @ORM\Column(type="datetime")
@@ -124,12 +123,12 @@ class Annonces
         return $this;
     }
 
-    public function getCategorie(): ?Categorie
+    public function getCategorie(): ?Categories
     {
         return $this->categorie;
     }
 
-    public function setCategorie(Categorie $categorie): self
+    public function setCategorie(Categories $categorie): self
     {
         $this->categorie = $categorie;
 

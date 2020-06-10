@@ -10,7 +10,9 @@
         <h2>{{annonce.prix}}</h2>
         <h2>{{annonce.ville}}</h2>
         <h2>{{annonce.categorie.nom}}</h2>
-        <img class="img-fluid" style="max-width:300px" src="/uploads/photos/{{ annonce.photo }}">
+         {% for image in annonce.images %}
+			<img class="img-fluid" style="max-width:200px" src="{{ asset('uploads/photos/' ~ image.name) }}">
+		{% endfor %}
         <h2>{{annonce.premium}}</h2>
         <a class="btn btn-warning" href="{{ path('annonceModifier', { id:annonce.id} )}}">Modifier</a>
         <a class="btn btn-danger" href="{{ path('annonceSupprimer', { id:annonce.id} )}}">Supprimer</a>

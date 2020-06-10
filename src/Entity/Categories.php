@@ -24,11 +24,8 @@ class Categories
      */
     private $nom;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Annonces::class, mappedBy="categorie")
-     */
-    private $annonces;
-
+   
+    
     /**
      * @ORM\Column(type="string", length=255)
      */
