@@ -11,7 +11,7 @@
 		<h3> {{ annonce.titre }} </h3>
 		<p class="lead"> {{ annonce.prix }}€</p>
 		<p class="lead"> {{ annonce.description }}</p>
-		 {% for image in annonce.images %}
+		{% for image in annonce.images %}
 			<img class="img-fluid" style="max-width:200px" src="{{ asset('uploads/photos/' ~ image.name) }}">
 		{% endfor %}
 	</div>

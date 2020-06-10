@@ -28,6 +28,8 @@ class BaseController extends AbstractController
         ]);
     }
 
+
+
     public function header($ROUTE_NAME)
     {
         // REQUETE SQL
@@ -78,5 +80,14 @@ class BaseController extends AbstractController
             'annonces' => $annoncesRepository->findAll(),
         ]);
     }
+
+
+    
+
+
+
+    
+
+
      
 }
