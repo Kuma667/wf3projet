@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Annonce{% endblock %}
+
+{% block body %}
+	
+	<h1>Modifier l'annonce</h1>
+	{% include '/_partials/flash.html.twig' %}
+ {{ form_start(annoncesForm) }}
+        {{ form_row(annoncesForm.titre) }}
+        {{ form_row(annoncesForm.description) }}
+        {{ form_row(annoncesForm.prix) }}
+        {{ form_row(annoncesForm.ville) }}
+        {{ form_row(annoncesForm.categorie) }}
+        {{ form_row(annoncesForm.photo) }}
+		 <img class="img-fluid" style="max-width:300px" src="/uploads/photos/{{ annonce.photo }}">
+        {{ form_row(annoncesForm.premium) }}
+		<button type="submit" class="btn btn-danger">Valider</button>
+{{ form_end(annoncesForm) }}
+	
+{% endblock %}
