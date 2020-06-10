@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\User;
+use App\Repository\UserRepository;
 
 
 class MembreController extends AbstractController
@@ -13,6 +15,7 @@ class MembreController extends AbstractController
      */
     public function index()
     {
+		
         return $this->render('membre/membre.html.twig', [
             'controller_name' => 'MembreController',
         ]);
@@ -24,16 +27,8 @@ class MembreController extends AbstractController
      
     public function historique()
     {
-        return $this->render('base/membre/historique.html.twig', [
+        return $this->render('/membre/historique.html.twig', [
 			
         ]);
-
-    #$iduser = $this->getUser()->getId();
-    public function membresAnnoncesList(AnnoncesRepository $annoncesRepo)
-    {
-        if($iduser = $this->getUser()->getId())
-        {
-            $liste = $annoncesRepo->findAll(); 
-        }
-    }
+	}
 }
