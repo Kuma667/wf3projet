@@ -6,7 +6,7 @@
 
 {% block body %}
 
-	<form class="pull-right hidden" role="search" id="nav-search-form" method="GET" action="">
+	<form class="pull-right hidden mb-5 mt-5" role="search" id="searchForm" method="GET" action="">
         <div class="input-group">
 			<select name="categorie">
 			 {% for cat in cats %}
@@ -14,25 +14,44 @@
 			 {% endfor %}
 			</select>
           <input type="text" class="form-control" placeholder="Search" name="search" value="{{ app.request.query.get('search') }}">
+			<input type="hidden" value="0" name="saveSearch" id="saveSearch">
           <span class="input-group-btn">
             <button type="submit" class="btn btn-primary">Valider</button>
+			  <span class="btn btn-warning" id="saveSearchBtn">Enregistrer la recherche</span>
           </span>
         </div>
       </form>
 	
 	
-		<h2>TEST SEARCH RESULT</h2>
 		{% for annonce in res %}
-			<div class="row">
-				<div class="col-md-12">
-					<p class="lead">{{ annonce.titre }}</p>
+			<div class="row mb-3">
+				<div class="col-md-4">
+					<img class="img-fluid" style="max-width:300px" src="{{ asset(annonce.image) }}">
+				</div>
+				<div class="col-md-8">
+					<a href="{{ path('annonceSingle', {id: annonce.id}) }}"><p class="lead">{{ annonce.titre }}</p></a>
 					<p class="lead">{{ annonce.prix }}</p>
 					<p class="lead">{{ annonce.ville }}</p>
-					<img class="img-fluid" style="max-width:300px" src="{{ asset('uploads/photos/' ~ annonce.image) }}">
 				</div>
 			
 			</div>
 		{% endfor %}
 	
+	
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	
+	<script>
+		$(document).ready(function($){
+			$('#saveSearchBtn').on("click", function(){
+                $('#saveSearch').val(1);
+				$('#searchForm').submit();
+            });
+
+        });
+
+	</script>
 	
 {% endblock %}

@@ -6,11 +6,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Annonces;
-use App\Entity\images;
 use App\Repository\ImagesRepository;
 use App\Entity\Historique;
 use App\Entity\User;
+use App\Entity\Images;
 use App\Repository\AnnoncesRepository;
+use App\Repository\CategoriesRepository;
 use App\Form\AnnoncesType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -53,10 +54,13 @@ class BaseController extends AbstractController
      * @Route("/annonce-{id}", name="annonceSingle")
      */
      
-    public function annonceSingle(Annonces $annonce)
+    public function annonceSingle(Annonces $annonce, CategoriesRepository $categoriesRepository)
     {
+		$cats = $categoriesRepository->findBy([], ['nom' => 'ASC']);
+		
         return $this->render('base/pages/annonceSingle.html.twig', [
             'annonce' => $annonce,
+			'cats' => $cats
         ]);
     }
 
@@ -64,20 +68,24 @@ class BaseController extends AbstractController
       /**
      * @Route("/annonces-liste", name="annoncesListe")
      */
-    public function annonces_list(AnnoncesRepository $annoncesRepository)
-    {
+    public function annonces_list(AnnoncesRepository $annoncesRepository, CategoriesRepository $categoriesRepository){
+		$cats = $categoriesRepository->findBy([], ['nom' => 'ASC']);
+		
         return $this->render('base/pages/annoncesListe.html.twig', [
             'annonces' => $annoncesRepository->findAll(),
+			'cats' => $cats
         ]);
     }
 	
 	/**
      * @Route("/annonces", name="annonces")
      */
-    public function annonces(AnnoncesRepository $annoncesRepository)
+    public function annonces(AnnoncesRepository $annoncesRepository, CategoriesRepository $categoriesRepository)
     {
+		$cats = $categoriesRepository->findBy([], ['nom' => 'ASC']);
         return $this->render('base/pages/allAnnonces.html.twig', [
             'annonces' => $annoncesRepository->findAll(),
+			'cats' => $cats
         ]);
     }
 

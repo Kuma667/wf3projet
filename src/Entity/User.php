@@ -68,10 +68,16 @@ class User implements UserInterface
      */
     private $isVerified = false;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Historique::class, mappedBy="user")
+     */
+    private $historiques;
+
     public function __construct()
     {
         $this->annonces = new ArrayCollection();
 		$this->createdAt = new \DateTime();
+  $this->historiques = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -246,5 +252,36 @@ class User implements UserInterface
     public function getIsVerified(): ?bool
     {
         return $this->isVerified;
+    }
+
+    /**
+     * @return Collection|Historique[]
+     */
+    public function getHistoriques(): Collection
+    {
+        return $this->historiques;
+    }
+
+    public function addHistorique(Historique $historique): self
+    {
+        if (!$this->historiques->contains($historique)) {
+            $this->historiques[] = $historique;
+            $historique->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHistorique(Historique $historique): self
+    {
+        if ($this->historiques->contains($historique)) {
+            $this->historiques->removeElement($historique);
+            // set the owning side to null (unless already changed)
+            if ($historique->getUser() === $this) {
+                $historique->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

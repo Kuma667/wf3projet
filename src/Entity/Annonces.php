@@ -69,6 +69,13 @@ class Annonces
      * @ORM\OneToMany(targetEntity=Images::class, mappedBy="annonces", orphanRemoval=true, cascade={"persist"})
      */
     private $images;
+	
+	public function getImage() : ?string {
+		if($this->getImages()->first()){
+			return $this->getImages()->first()->getUrl();
+		}
+		return "uploads/photos/placeholder.png";
+	}
 
     public function getId(): ?int
     {

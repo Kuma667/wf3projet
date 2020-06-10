@@ -8,9 +8,10 @@ use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Entity\Historique;
 use App\Repository\AnnoncesRepository;
+use App\Repository\CategoriesRepository;
 use App\Form\AnnoncesType;
 use App\Entity\Annonces;
-use App\Entity\images;
+use App\Entity\Images;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -22,11 +23,13 @@ class MembreController extends AbstractController
     /**
      * @Route("/membre", name="membre")
      */
-    public function index()
+    public function index(CategoriesRepository $categoriesRepository)
     {
+		$cats = $categoriesRepository->findBy([], ['nom' => 'ASC']);
 		
         return $this->render('membre/membre.html.twig', [
             'controller_name' => 'MembreController',
+			'cats' => $cats
         ]);
     }
 	
@@ -34,10 +37,12 @@ class MembreController extends AbstractController
      * @Route("/membre/historique", name="historique")
      */
      
-    public function historique()
+    public function historique(CategoriesRepository $categoriesRepository)
     {
+		$cats = $categoriesRepository->findBy([], ['nom' => 'ASC']);
+		
         return $this->render('/membre/historique.html.twig', [
-			
+			'cats' => $cats
         ]);
 	}
     
@@ -56,30 +61,30 @@ class MembreController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-        //recupère image
-            $images = $form->get('images')->getData();
+			//recupère image
+				$images = $form->get('images')->getData();
 
 
-        foreach($images as $image){
-            $fichier = md5(uniqid()).'.'. $image->guessExtension();
+			foreach($images as $image){
+				$fichier = md5(uniqid()).'.'. $image->getClientOriginalExtension();
 
-            $image->move(
-                $this->getParameter('images_directory'),
-                $fichier
-            );
+				$image->move(
+					$this->getParameter('images_directory'),
+					$fichier
+				);
 
-            $img = new Images();
-            $img->setName($fichier);
-            $annonce->addImage($img);
-        }
-        
-        $em = $this->getDoctrine()->getManager();
-			$annonce->setUser($this->getUser());
-			$em->persist($annonce);
-			$em->flush();
-			$this->addFlash('success', 'L\'annonce a bien été ajoutée');
-		//	return $this->redirectToRoute('modifierAnnonce');
-			return $this->redirect($request->getPathInfo());
+				$img = new Images();
+				$img->setName($fichier);
+				$annonce->addImage($img);
+			}
+
+			$em = $this->getDoctrine()->getManager();
+				$annonce->setUser($this->getUser());
+				$em->persist($annonce);
+				$em->flush();
+				$this->addFlash('success', 'L\'annonce a bien été ajoutée');
+			//	return $this->redirectToRoute('modifierAnnonce');
+				return $this->redirect($request->getPathInfo());
 		}
 
         return $this->render('/membre/modifierAnnonce.html.twig', [
@@ -108,20 +113,30 @@ class MembreController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-			$file = $form['images']->getData();
-			if($file){
-				$repertoire = $this->getParameter('uploadPhotos');
-				//dd($file->getClientOriginalExtension());
-				$nomDuDoc = 'images'.uniqid().'.'.$file->getClientOriginalExtension();
-				$file->move($repertoire, $nomDuDoc);
-				$annonce->setImage($nomDuDoc);
+			//recupère image
+				$images = $form->get('images')->getData();
+
+
+			foreach($images as $image){
+				$fichier = md5(uniqid()).'.'. $image->getClientOriginalExtension();
+
+				$image->move(
+					$this->getParameter('images_directory'),
+					$fichier
+				);
+
+				$img = new Images();
+				$img->setName($fichier);
+				$annonce->addImage($img);
 			}
+
 			$em = $this->getDoctrine()->getManager();
-			$annonce->setUser($this->getUser());
-			$em->flush();
-			$this->addFlash('success', 'L\'annonce a bien été modifié');
-			
-			return $this->redirect($request->getPathInfo());
+				$annonce->setUser($this->getUser());
+				$em->persist($annonce);
+				$em->flush();
+				$this->addFlash('success', 'L\'annonce a bien été modifiée');
+			//	return $this->redirectToRoute('modifierAnnonce');
+				return $this->redirect($request->getPathInfo());
 		}
 
         return $this->render('/membre/modifierAnnonce.html.twig', [

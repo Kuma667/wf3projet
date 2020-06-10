@@ -27,6 +27,10 @@ class Images
      * @ORM\JoinColumn(nullable=false)
      */
     private $annonces;
+	
+	public function getUrl(){
+		return "uploads/photos/".$this->name;
+	}
 
     public function getId(): ?int
     {

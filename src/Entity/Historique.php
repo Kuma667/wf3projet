@@ -26,10 +26,15 @@ class Historique
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="historiques")
+     */
+    private $user;
 	
 	public function __construct(){
-		$this->createdAt = new \DateTime();
-	}
+    	$this->createdAt = new \DateTime();
+     }
 
     public function getId(): ?int
     {
@@ -56,6 +61,18 @@ class Historique
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -3,6 +3,9 @@
 {% block title %}Gestion des annonces - Alsannonces{% endblock %}
 
 {% block body %}
+	
+	{% include '/_partials/searchBar.html.twig' %}
+	
     {% for annonce in app.user.annonces %}
 		
         <h2>{{annonce.titre}}</h2>

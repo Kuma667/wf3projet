@@ -67,6 +67,20 @@ class SearchController extends AbstractController
 		$categorie = $request->query->get('categorie');
 		$order = $request->query->get('order');
 		$villes = $annoncesRepository->findBy([], ['ville' => 'ASC']);
+		$saveSearch = $request->query->get('saveSearch');
+		if($saveSearch){
+			$cleanUri = str_replace('&saveSearch=1', "", $request->getRequestUri());
+			$historique = (new Historique())
+				->setUrlHistorique($cleanUri)
+				->setUser($this->getUser());
+			//dd($historique);
+			
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($historique);
+			$em->flush();
+			$this->addFlash('success', 'La recherche a été enregistrée');
+			return $this->redirect($cleanUri);
+		}
 		
 		
 		$cats = $categoriesRepository->findBy([], ['nom' => 'ASC']);
