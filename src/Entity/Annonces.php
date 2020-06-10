@@ -51,9 +51,9 @@ class Annonces
     private $createdAt;
 	
 	public function __construct(){
-                           		$this->createdAt = new \DateTime();
-                             $this->images = new ArrayCollection();
-                           	}
+    	$this->createdAt = new \DateTime();
+    	$this->images = new ArrayCollection();
+    }
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="annonces")
