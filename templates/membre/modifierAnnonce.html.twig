@@ -13,11 +13,16 @@
         {{ form_row(annoncesForm.ville) }}
         {{ form_row(annoncesForm.categorie) }}
         {{ form_row(annoncesForm.images) }}
+		{% if app.request.attributes.get('_route') == 'annonceModifier' %}
           {% for image in annonce.images %}
-	        <img class="img-fluid" style="max-width:200px" src="{{ asset('uploads/photos/' ~ image.name) }}">
-	{% endfor %}
+          	<div>
+            	<img class="img-fluid" style="max-width:200px" src="{{ asset('uploads/photos/' ~ image.name) }}">
+                <a href="{{ path('imageSupprimer', {id: image.id}) }}" data-delete data-token="{{csrf_token('delete' ~ image.id) }}" class="btn btn-danger">Supprimer</a><br><br>
+        	</div>
+		  {% endfor %}
+        {% endif %}
         {{ form_row(annoncesForm.premium) }}
-	<button type="submit" class="btn">Valider</button>
+		<button type="submit" class="btn btn-warning mb-5">Valider</button>
 {{ form_end(annoncesForm) }}
 	
 {% endblock %}

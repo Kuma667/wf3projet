@@ -162,4 +162,19 @@ class MembreController extends AbstractController
         return $this->render('/membre/annonceSupprimer.html.twig', [
         ]);
     }
+	
+	/**
+     * @Route("/membre/image-supprimer-{id}", name="imageSupprimer")
+     */
+
+    public function deleteImage(Request $request, Images $image)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($image);
+        $em->flush();
+		
+		$referer = filter_var($request->headers->get('referer'), FILTER_SANITIZE_URL);
+
+		return $this->redirect($referer);
+     }
 }
