@@ -95,6 +95,9 @@ class SearchController extends AbstractController
 			$query->orderBy('a.'.$order, 'ASC');
 		}else{
 			$query->orderBy('a.id', 'DESC');
+			if($query->orderBy('a.id', 'DESC')){
+				$query->orderBy('a.id', 'ASC');
+			}
 		}
 			
 		if($categorie){

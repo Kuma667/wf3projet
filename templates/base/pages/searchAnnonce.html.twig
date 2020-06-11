@@ -7,31 +7,50 @@
 {% block body %}
 
 	<form class="pull-right hidden mb-5 mt-5" role="search" id="searchForm" method="GET" action="">
-        <div class="input-group">
-			<select name="categorie">
-			 {% for cat in cats %}
-				 <option value="{{ cat.slug }}"> {{ cat.nom }}</option> 
-			 {% endfor %}
-			</select>
-          <input type="text" class="form-control" placeholder="Search" name="search" value="{{ app.request.query.get('search') }}">
-			<input type="hidden" value="0" name="saveSearch" id="saveSearch">
-          <span class="input-group-btn">
-            <button type="submit" class="btn btn-primary">Valider</button>
-			  <span class="btn btn-warning" id="saveSearchBtn">Enregistrer la recherche</span>
-          </span>
-        </div>
+       
+			<div class="row mb-3">
+				<div class="col-md-2">
+					<select name="categorie" class="form-control">
+					 {% for cat in cats %}
+						 <option value="{{ cat.slug }}"> {{ cat.nom }}</option> 
+					 {% endfor %}
+					</select>
+					</div>
+					<div class="col-md-6">
+						<input type="text" class="form-control" placeholder="Search" name="search" value="{{ app.request.query.get('search') }}">
+						<input type="hidden" value="0" name="saveSearch" id="saveSearch">
+					</div>
+					<div class="col-md-4">
+						<span class="input-group-btn">
+							<button type="submit" class="btn btn-primary">Valider</button>
+							<span class="btn btn-warning" id="saveSearchBtn">Enregistrer la recherche</span>
+						</span>
+					</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+						<select id="triSelect" class="form-control" name="order">
+							<option value="" disabled selected>Trier par..</option>
+							<option value="prix">Prix</option>
+							<option value="date">Date</option>
+						</select>
+				</div>
+				<div class="col-md-9"></div>
+				
+			</div>
       </form>
 	
-	
+		
 		{% for annonce in res %}
 			<div class="row mb-3">
 				<div class="col-md-4">
-					<img class="img-fluid" style="max-width:300px" src="{{ asset(annonce.image) }}">
+					<a href="{{ path('annonceSingle', {id: annonce.id}) }}"><img class="img-fluid" style="max-width:300px" src="{{ asset(annonce.image) }}"></a>
 				</div>
 				<div class="col-md-8">
 					<a href="{{ path('annonceSingle', {id: annonce.id}) }}"><p class="lead">{{ annonce.titre }}</p></a>
-					<p class="lead">{{ annonce.prix }}</p>
+					<p class="lead">{{ annonce.prix }}€</p>
 					<p class="lead">{{ annonce.ville }}</p>
+					<p class="">{{ annonce.createdAt.format('Y-m-d H:i') }}</p>
 				</div>
 			
 			</div>
@@ -49,6 +68,10 @@
                 $('#saveSearch').val(1);
 				$('#searchForm').submit();
             });
+			
+			$('#triSelect').on("change", function(){
+				$('#searchForm').submit();
+			})
 
         });
 
