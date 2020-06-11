@@ -40,6 +40,8 @@ class MembreController extends AbstractController
     public function historique(CategoriesRepository $categoriesRepository)
     {
 		$cats = $categoriesRepository->findBy([], ['nom' => 'ASC']);
+		$his = $this->getUser()->getHistoriques();
+		//dd($his);
 		
         return $this->render('/membre/historique.html.twig', [
 			'cats' => $cats
