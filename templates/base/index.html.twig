@@ -10,8 +10,8 @@
 				<div class="row justify-content-center">
 					<div class="col-md-12 col-lg-9 col-xs-12 text-center">
 						<div class="contents">
-							<h1 class="head-title">Bienvenue sur le plus grand <br><span class="year" style="color: #eb5160">site d'annonces d'Alsace</span></h1>
-							<p>Achetez et vendez de tout. Des voitures d'occasion, téléphones portables, ordinateurs.. ou recherchez des biens, emplois et bien plus encore.</p>
+							<h1 class="head-title" style="font-family: Raleway; font-weight: 500">Bienvenue sur le plus grand <br><span class="year" style="color: #eb5160">site d'annonces d'Alsace</span></h1>
+							<p style="font-family: Raleway; font-weight: 300">Achetez et vendez de tout</p>
 							{% include '/_partials/searchBar.html.twig' %}
 						</div>
 					</div>
@@ -48,10 +48,10 @@
 										<a href="#"><i class="lni-map-marker"></i> {{ annonce.ville }}</a>
 									</span>
 								</div>
-								<p class="dsc"> {{ annonce.description }} </p>
+								<p class="dsc" style="color: black"> {{ annonce.description }} </p>
 								<div class="listing-bottom">
-									<h3 class="price float-left" style="margin-right:15px">{{ annonce.prix }}€</h3>
-									<a href="{{ path('annonceSingle', {id: annonce.id}) }}" class="btn btn-common float-right" style="float:right">Voir les détails</a>
+									<h3 class="price float-left" style="margin-right:20px">{{ annonce.prix }}€</h3>
+									<a href="{{ path('annonceSingle', {id: annonce.id}) }}" class="btn btn-common float-right" style="float:right; background-color: #6550ff">Voir les détails</a>
 								</div>
 							</div>
 						</div>
