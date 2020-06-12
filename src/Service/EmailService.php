@@ -18,17 +18,11 @@ class EmailService{
 		$this->MY_EMAIL = $MY_EMAIL;
 	}
 	
-	public function sendEmail($mail, $message){
+	public function sendMail($nom, $sujet, $mail, $message){
 		 $mail = (new TemplatedEmail())
             ->from($mail)
             ->to($this->MY_EMAIL)
-            //->cc('cc@example.com')
-            //->bcc('bcc@example.com')
-            //->replyTo('fabien@example.com')
-            //->priority(Email::PRIORITY_HIGH)
-            ->subject('Formulaire Contact')
-            ->text('Sending emails is fun again!')
-            //->html('<p>Nouveau message du site : <br>'.$message.'</p>');
+            ->subject('Contact Alsannonces : '.$sujet)
 		
 			// path of the Twig template to render
 			->htmlTemplate('email/contact.email.twig')
@@ -37,6 +31,7 @@ class EmailService{
     		->context([
 				'mail' => $mail,
 				'message' => $message,
+				'nom' => $nom
 			]);
 
         $this->mailer->send($mail);

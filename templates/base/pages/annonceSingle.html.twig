@@ -41,7 +41,7 @@
 							{% for image in annonce.images %}
 								<div class="item">
 									<div class="product-img">
-										<img class="img-fluid" src="{{ asset('uploads/photos/' ~ image.name) }}" alt="">
+										<img class="img-fluid" src="{{ asset('uploads/photos/' ~ image.name) }}" alt="" style="max-width:500px">
 									</div>
 									<span class="price">{{ annonce.prix }}€</span>
 								</div>

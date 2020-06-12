@@ -4,22 +4,134 @@
 
 {% block body %}
 	
-	{% include '/_partials/searchBar.html.twig' %}
-	
-    {% for annonce in app.user.annonces %}
+	<div class="page-header" style="background: url(assets/img/banner1.jpg);">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="breadcrumb-wrapper">
+						<h2 class="product-title">Tableau de bord</h2>
+						<ol class="breadcrumb">
+							<li><a href="#">Accueil /</a></li>
+							<li class="current">Tableau de bord</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
 		
-        <h2>{{annonce.titre}}</h2>
-        <h2>{{annonce.description}}</h2>
-        <h2>{{annonce.prix}}</h2>
-        <h2>{{annonce.ville}}</h2>
-        <h2>{{annonce.categorie.nom}}</h2>
-         {% for image in annonce.images %}
-			<img class="img-fluid" style="max-width:200px" src="{{ asset('uploads/photos/' ~ image.name) }}">
-		{% endfor %}
-        <h2>{{annonce.premium}}</h2>
-        <a class="btn btn-warning" href="{{ path('annonceModifier', { id:annonce.id} )}}">Modifier</a>
-        <a class="btn btn-danger" href="{{ path('annonceSupprimer', { id:annonce.id} )}}">Supprimer</a>
-        
-    {% endfor %}
-
+		{% include '/_partials/searchBar.html.twig' %}
+		
+		<div id="content" class="section-padding">
+		<div class="container mt-5">
+			<div class="row">
+				<div class="col-sm-12 col-md-4 col-lg-3 page-sidebar">
+					<aside>
+						<div class="sidebar-box">
+							<div class="user">
+								<figure>
+									<a href="#"><img src="{{ asset('assets/img/author/unnamed.png') }}" alt=""></a>
+								</figure>
+								<div class="usercontent">
+									<h3>Bonjour {{ app.user.prenom }}</h3>
+								</div>
+							</div>
+							<nav class="navdashboard">
+								<ul>
+									<li>
+										<a class="active" href="dashboard.html">
+											<i class="lni-dashboard"></i>
+											<span>Tableau de bord</span>
+										</a>
+									</li>
+									<li>
+										<a href="{{ path('ajoutAnnonce') }}">
+											<i class="lni-pencil-alt"></i>
+											<span>Ajouter une annonce</span>
+										</a>
+									</li>
+									<li>
+										<a href="{{ path('app_logout') }}">
+											<i class="lni-enter"></i>
+											<span>Déconnexion</span>
+										</a>
+									</li>
+								</ul>
+							</nav>
+						</div>
+					</aside>
+				</div>
+				<div class="col-sm-12 col-md-8 col-lg-9">
+					<div class="page-content">
+						<div class="inner-box">
+							<div class="dashboard-box">
+								<h2 class="dashbord-title">Tableau de bord</h2>
+							</div>
+							<div class="dashboard-wrapper">
+								<div class="dashboard-sections">
+									<div class="row">
+									</div>
+								</div>
+								<table class="table table-responsive dashboardtable tablemyads">
+									<thead>
+										<tr>
+<!--
+											<th>
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input" id="checkedall">
+													<label class="custom-control-label" for="checkedall"></label>
+												</div>
+											</th>
+-->
+											<th>Photo</th>
+											<th>Titre</th>
+											<th>Catégorie</th>
+											<th>Statut de l'annonce</th>
+											<th>Prix</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for annonce in app.user.annonces %}
+										<tr data-category="active">
+<!--
+											<td>
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input" id="adone">
+													<label class="custom-control-label" for="adone"></label>
+												</div>
+											</td>
+-->
+											
+												<td class="photo"><img class="img-fluid" src="{{ asset(annonce.image) }}" alt=""></td>
+												<td data-title="Title">
+													<h3>{{ annonce.titre }}</h3>
+												</td>
+												<td data-title="Category"><span class="adcategories">{{annonce.categorie.nom}}</span></td>
+												<td data-title="Ad Status"><span class="adstatus adstatusactive">active</span></td>
+												<td data-title="Price">
+													<h3>{{ annonce.prix }}€</h3>
+												</td>
+												<td data-title="Action">
+													<div class="btns-actions">
+														<a class="btn-action btn-view" href="{{ path('annonceSingle', {id: annonce.id}) }}"><i class="lni-eye"></i></a>
+														<a class="btn-action btn-edit" href="{{ path('annonceModifier', { id:annonce.id} )}}"><i class="lni-pencil"></i></a>
+														<a class="btn-action btn-delete" href="{{ path('annonceSupprimer', { id:annonce.id} )}}"><i class="lni-trash"></i></a>
+													</div>
+												</td>
+											
+										</tr>
+											{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		
+	</div>
 {% endblock %}

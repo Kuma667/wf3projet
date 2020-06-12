@@ -3,8 +3,23 @@
 {% block title %}Ajouter annonce{% endblock %}
 
 {% block body %}
+	<div class="page-header" style="background: url({{ asset('assets/img/banner1.jpg)') }};">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="breadcrumb-wrapper">
+						<h2 class="product-title">Publiez vos annonces</h2>
+						<ol class="breadcrumb">
+							<li><a href="#">Accueil /</a></li>
+							<li class="current">Publiez vos annonces</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<div class="container mb-5 p-5">
-		<h1>Ajouter annonce</h1>
 		{% include '/_partials/flash.html.twig' %}
 		{{ form_start(annoncesForm) }}
 			{{ form_row(annoncesForm.titre) }}
@@ -12,10 +27,11 @@
 			{{ form_row(annoncesForm.prix) }}
 			{{ form_row(annoncesForm.ville) }}
 			{{ form_row(annoncesForm.categorie) }}
-			{{ form_row(annoncesForm.images) }}
+			{{ form_row(annoncesForm.images, {'attr': {'class': 'form-control-file'} }) }}
 			{{ form_row(annoncesForm.premium) }}
 
-			<button type="submit" class="btn btn-success btn-block">Valider</button>
+			<button type="submit" class="btn btn-primary btn-block">Valider</button>
 		{{ form_end(annoncesForm) }}
 	</div>
+	
 {% endblock %}

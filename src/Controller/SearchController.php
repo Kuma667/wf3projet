@@ -23,6 +23,7 @@ class SearchController extends AbstractController
         $search = $request->query->get('search');
 		$categorie = $request->query->get('categorie');
 		$order = $request->query->get('order');
+		$annonces = $this->getDoctrine()->getRepository(Annonces::class)->findBy(array(), array('id' => 'desc'), 6);
 		
 		$cats = $categoriesRepository->findBy([], ['nom' => 'ASC']);
 		$villes = $annoncesRepository->findBy([], ['ville' => 'ASC']);
@@ -54,7 +55,8 @@ class SearchController extends AbstractController
         return $this->render('base/index.html.twig', [
             'res' => $res,
 			'cats' => $cats,
-			'villes' => $villes
+			'villes' => $villes,
+			'annonces' => $annonces
         ]);
     }
 	

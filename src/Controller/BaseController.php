@@ -113,11 +113,35 @@ class BaseController extends AbstractController
 		return $this->redirect($referer);
 	}
 
+	/**
+     * @Route("/contact", name="contact")
+     */
+    public function contact(Request $request, EmailService $emailService, CategoriesRepository $categoriesRepository){
+		$cats = $categoriesRepository->findBy([], ['nom' => 'ASC']);
+		
+			if($request->isMethod('POST')){
+				$nom = $request->request->get('nom');
+				$sujet = $request->request->get('sujet');
+				$mail = $request->request->get('mail');
+				$msg = $request->request->get('message');
 
-    
+				// Envoi de l'email
+				$send = $emailService->sendMail($nom, $sujet, $mail, $msg);
+				$this->addFlash('success', 'Nous avons bien reçu votre message. Nous vous répondrons au plus vite.');
+				return $this->redirectToRoute('contact');
+			}
+		return $this->render('base/pages/contact.html.twig', [
+			'cats' => $cats,
+		]);
+	}
 
 
-
+	/**
+     * @Route("/a-propos", name="about")
+     */
+	public function about(){
+		return $this->render('base/pages/about.html.twig');
+	}
     
 
 

@@ -1,0 +1,79 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	
+	<div class="page-header" style="background: url({{ asset('assets/img/banner1.jpg') }});">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="breadcrumb-wrapper">
+						<h2 class="product-title">A Propos</h2>
+						<ol class="breadcrumb">
+							<li><a href="#">Accueil /</a></li>
+							<li class="current">A Propos</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<section id="about" class="section-padding">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-lg-6 col-xs-12">
+					<div class="about-wrapper">
+						<h2 class="intro-title">Pourquoi nous sommes uniques</h2>
+						<p class="intro-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit nostrum, doloremque quaerat sit tempora eius est reiciendis accusamus magnam quae. Explicabo dolore officia, iure a ullam aliquam nemo excepturi, repellat. uod ut delectus ad tempora.
+						</p>
+						<a href="{{ path('ajoutAnnonce') }}" class="btn btn-common btn-lg">Ajouter une annonce</a>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-6 col-xs-12">
+					<img class="img-fluid" src="assets/img/about/about.png" alt="">
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section class="counter-section section-padding">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-3 col-sm-6 work-counter-widget">
+					<div class="counter">
+						<div class="icon"><i class="lni-layers"></i></div>
+						<h2 class="counterUp">8325</h2>
+						<p>Annonces publiées</p>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 work-counter-widget">
+					<div class="counter">
+						<div class="icon"><i class="lni-users"></i></div>
+						<h2 class="counterUp">5487</h2>
+						<p>Membres</p>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 work-counter-widget">
+					<div class="counter">
+						<div class="icon"><i class="lni-briefcase"></i></div>
+						<h2 class="counterUp">2500</h2>
+						<p>Annonces Premium</p>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 work-counter-widget">
+					<div class="counter">
+						<div class="icon"><i class="lni-map"></i></div>
+						<h2 class="counterUp">17</h2>
+						<p>Villes</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	
+{% endblock %}

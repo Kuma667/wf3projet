@@ -5,9 +5,9 @@
 				<div class="row">
 					<div class="col-lg-4 col-md-4 col-xs-6 col-mb-12">
 						<div class="widget">
-							<div class="footer-logo"><img src="assets/img/logoFooter.png" alt=""></div>
+							<div class="footer-logo"><img src="{{ asset('assets/img/logoalsannonces_blanc.png') }}" alt=""></div>
 							<div class="textwidget">
-								<p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt consectetur, adipisci velit.</p>
+								<p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt consectetur, adipisci velit. <br> </p>
 							</div>
 							<ul class="mt-3 footer-social">
 								<li><a class="facebook" href="#"><i class="lni-facebook-filled"></i></a></li>
@@ -18,30 +18,35 @@
 					</div>
 					<div class="col-lg-4 col-md-4 col-xs-6 col-mb-12">
 						<div class="widget">
-							<h3 class="block-title">Lien rapide</h3>
+							<h3 class="block-title">Liens diverses</h3>
 							<ul class="menu">
-								<li><a href="about.html">- A Propos</a></li>
-								<li><a href="category.html">- Categories</a></li>
-								<li><a href="contact.html">- Contact</a></li>
-								<li><a href="faq.html">- FAQ</a></li>
+								<li><a href="about.html">CGU</a></li>
+								<li><a href="category.html">CGV</a></li>
+								<li><a href="contact.html">Mentions légales</a></li>
+								<li><a href="faq.html">Nous contacter</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-xs-6 col-mb-12">
 						<div class="widget">
-							<h3 class="block-title">Informations de contact</h3>
+							<h3 class="block-title">Informations</h3>
 							<ul class="contact-footer">
 								<li>
 									<strong><i class="lni-phone"></i></strong><span>+33 12 12 12 12 <br> +33 13 13 13 13</span>
 								</li>
 								<li>
-									<strong><i class="lni-envelope"></i></strong><span><a href="http://preview.uideck.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cdaea2a3b9acaeb98da0aca4a1e3aea2a0">contact@alsannonces.fr</a></span>
+									<strong><i class="lni-envelope"></i></strong><span><a href="{{ path('contact') }}">contact@alsannonces.fr</a></span>
 								</li>
 								<li>
-									<strong><i class="lni-map-marker"></i></strong><span><a href="#">204 Avenue de Colmar <br>Strasbourg, 67100</a></span>
+									<strong><i class="lni-map-marker"></i></strong><span><a href="{{ path('contact') }}">204 Avenue de Colmar <br>Strasbourg, 67100</a></span>
 								</li>
 							</ul>
 						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 text-center text-white">
+						Copyright © ALSANNONCES 2020
 					</div>
 				</div>
 			</div>

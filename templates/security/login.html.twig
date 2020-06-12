@@ -3,47 +3,69 @@
 {% block title %}Connexion Alsannonces{% endblock %}
 
 {% block body %}
-<div class="container mb-5 p-5">
-	<div class="row">
-		<div class="col-md-12">
-			<form method="post">
-				{% if error %}
-					<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-				{% endif %}
-
-				{% if app.user %}
-					<div class="mb-3">
-						Vous êtes connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
+	
+	<div class="page-header" style="background: url(assets/img/banner1.jpg);">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="breadcrumb-wrapper">
+						<h2 class="product-title">Connexion</h2>
+						<ol class="breadcrumb">
+							<li><a href="index-2.html">Accueil /</a></li>
+							<li class="current">Connexion</li>
+						</ol>
 					</div>
-				{% endif %}
-
-				<h1 class="h3 mb-3 mt-3 font-weight-normal">Se connecter</h1>
-				<label for="inputEmail">Email</label>
-				<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-				<label for="inputPassword">Mot de passe</label>
-				<input type="password" name="password" id="inputPassword" class="form-control" required>
-
-				<input type="hidden" name="_csrf_token"
-					   value="{{ csrf_token('authenticate') }}"
-				>
-
-				{#
-					Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-					See https://symfony.com/doc/current/security/remember_me.html
-
-					<div class="checkbox mb-3">
-						<label>
-							<input type="checkbox" name="_remember_me"> Remember me
-						</label>
-					</div>
-				#}
-
-				<button class="btn btn-lg btn-info mt-3 mb-3" type="submit">
-				   Connexion
-				</button>
-			</form>
-				Pas encore de compte ? <a href="{{ path('app_register') }}"> Inscrivez-vous </a>
+				</div>
+			</div>
 		</div>
 	</div>
-</div>
+	
+	<section class="login section-padding">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-5 col-md-12 col-xs-12">
+					<div class="login-form login-area">
+						<h3>
+							Se connecter
+						</h3>
+						<form role="form" class="login-form" method="POST">
+							{% if error %}
+								<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+							{% endif %}
+							{% if app.user %}
+								<div class="mb-3">
+									Vous êtes connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
+								</div>
+							{% endif %}
+							<div class="form-group">
+								<div class="input-icon">
+									<i class="lni-user"></i>
+									<input type="email" value="{{ last_username }}" id="inputEmail" class="form-control" name="email" placeholder="Adresse email" required autofocus>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="input-icon">
+									<i class="lni-lock"></i>
+									<input type="password" name="password" id="inputPassword" class="form-control" required placeholder="Mot de passe">
+								</div>
+							</div>
+							<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+							<div class="checkbox mb-3">
+								<label>
+									<input type="checkbox" name="_remember_me"> Se souvenir de moi
+								</label>
+							</div>
+							<div class="text-center">
+								<button class="btn btn-common log-btn">Connexion</button>
+							</div>
+							<div class="form-group mb-3 mt-2">
+								<a class="forgetpassword" style="float:left" href="forgot-password.html">Mot de passe oublié?</a>
+							</div>
+						</form>
+						Pas encore de compte ? <a href="{{ path('app_register') }}"> Inscrivez-vous </a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 {% endblock %}

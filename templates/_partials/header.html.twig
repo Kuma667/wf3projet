@@ -36,7 +36,7 @@
 						<span class="lni-menu"></span>
 						<span class="lni-menu"></span>
 					</button>
-					<a href="{{ path('accueil') }}" class="navbar-brand"><img src="{{ asset('assets/img/logo2.png') }}" alt=""></a>
+					<a href="{{ path('accueil') }}" class="navbar-brand"><img src="{{ asset('assets/img/logoalsannonces_rose.png') }}" alt=""></a>
 				</div>
 				<div class="collapse navbar-collapse" id="main-navbar">
 					<ul class="navbar-nav mr-auto w-100 justify-content-center">
@@ -58,11 +58,11 @@
 							</li>
 						{% endif %}
 						<li class="nav-item alsace">
-							<a class="nav-link alsace-toggle" href="about.html">
+							<a class="nav-link alsace-toggle" href="{{ path('about')}}">
 								A Propos
 							</a>
 						<li class="nav-item">
-							<a class="nav-link" href="contact.html">
+							<a class="nav-link" href="{{ path('contact') }}">
 								Contact
 							</a>
 						</li>
@@ -79,8 +79,8 @@
 						Accueil
 					</a>
 					<a href="{{ path('ajoutAnnonce') }}">Déposer une annonce</a>
-					<a href="about.html">A propos</a>
-					<a href="contact.html">Nous contacter</a>
+					<a href="{{ path('about')}}">A propos</a>
+					<a href="{{ path('contact') }}">Nous contacter</a>
 					{% if app.user %}
 						<a href="{{ path('membre') }}">Gérer mes annonces</a>
 						<a href="{{ path('historique') }}">Mes recherches</a>

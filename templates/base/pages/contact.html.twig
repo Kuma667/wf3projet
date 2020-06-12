@@ -1,0 +1,120 @@
+{# LISTING ANNONCES du USER  #}
+
+{% extends "base.html.twig" %}
+
+{% block body %}
+	
+	<div class="page-header" style="background: url({{ asset('assets/img/banner1.jpg')}});">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="breadcrumb-wrapper">
+						<h2 class="product-title">Nous contacter</h2>
+						<ol class="breadcrumb">
+							<li><a href="#">Accueil /</a></li>
+							<li class="current">Nous contacter</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container">
+		{% include '/_partials/searchBar.html.twig' %}
+		
+		<section id="google-map-area">
+			<div class="container mt-5 p-3">
+				<div class="row">
+					<div class="col-12">
+						<!-- <object style="border:0; height: 450px; width: 100%;" data="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d34015.943594576835!2d-106.43242624069771!3d31.677719472407432!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86e75d90e99d597b%3A0x6cd3eb9a9fcd23f1!2sCourtyard+by+Marriott+Ciudad+Juarez!5e0!3m2!1sen!2sbd!4v1533791187584"></object> -->
+						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2640.747213325694!2d7.7450931158455845!3d48.55723592981731!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4796c99f3ec0fb17%3A0xf80c9c9b675d1bcf!2s204%20Avenue%20de%20Colmar%2C%2067100%20Strasbourg!5e0!3m2!1sfr!2sfr!4v1591696295217!5m2!1sfr!2sfr" style="border:0; height: 450px; width: 100%;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+	<section id="content" class="section-padding">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-md-8 col-xs-12">
+					{% include '/_partials/flash.html.twig' %}
+					<form class="contact-form" method="POST" action="{{ path('contact') }}">
+						<h2 class="contact-title">
+							Envoyez-nous un message
+						</h2>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="row">
+									<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+										<div class="form-group">
+											<input type="text" class="form-control" id="nom" name="nom" placeholder="Nom / Prénom" required data-error="Nom requis">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+										<div class="form-group">
+											<input type="email" class="form-control" id="mail" name="mail" placeholder="Email" required data-error="Email requis">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+										<div class="form-group">
+											<input type="text" class="form-control" id="sujet" name="sujet" placeholder="Sujet" required data-error="Sujet requis">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-12 col-md-12 col-lg-12">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<textarea class="form-control" name="message" placeholder="Votre Message" rows="7" data-error="Écrivez votre message" required></textarea>
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<input type="hidden" name="formEnvoi">
+							<div class="col-md-12">
+								<button type="submit" class="btn btn-info form-control">Envoyer</button>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="col-lg-4 col-md-4 col-xs-12">
+<!--
+					<div class="information mb-4">
+						<h3>Adresse</h3>
+						<div class="contact-datails">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc metus lectus, viverra vehicula porta id, posuere at massa. Nam sollicitudin porta nunc.</p>
+						</div>
+					</div>
+-->
+					<div class="information">
+						<h3>Informations de contact</h3>
+						<div class="contact-datails">
+							<ul class="list-unstyled info">
+								<li><span>Adresse : </span>
+									<p> 204 Avenue de Colmar, STRASBOURG 67100</p>
+								</li>
+								<li><span>Email : </span>
+									<p><a href="#">contact@alsannonces.fr</a></p>
+								</li>
+								<li><span>Tel :</span>
+									<p> +33 12 12 12 12</p>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+		
+	</div>
+
+{% endblock %}

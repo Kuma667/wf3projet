@@ -3,7 +3,6 @@
 {% block title %}Alsannonces - Accueil{% endblock %}
 
 {% block body %}
-	{% include '/_partials/flash.html.twig' %}
 	
 	<div id="hero-area">
 			<div class="overlay"></div>
@@ -11,7 +10,7 @@
 				<div class="row justify-content-center">
 					<div class="col-md-12 col-lg-9 col-xs-12 text-center">
 						<div class="contents">
-							<h1 class="head-title">Bienvenue sur le plus grand <br><span class="year">site d'annonces d'Alsace</span></h1>
+							<h1 class="head-title">Bienvenue sur le plus grand <br><span class="year" style="color: #eb5160">site d'annonces d'Alsace</span></h1>
 							<p>Achetez et vendez de tout. Des voitures d'occasion, téléphones portables, ordinateurs.. ou recherchez des biens, emplois et bien plus encore.</p>
 							{% include '/_partials/searchBar.html.twig' %}
 						</div>
@@ -26,219 +25,38 @@
 		<div class="container">
 			<h1 class="section-title">Les dernières annonces</h1>
 			<div class="row">
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
-					<div class="featured-box">
-						<figure>
-							<div class="icon">
-								<span class="bg-green"><i class="lni-heart"></i></span>
-								<span><i class="lni-bookmark"></i></span>
-							</div>
-							<a href="#"><img class="img-fluid" src="assets/img/featured/img-1.jpg" alt=""></a>
-						</figure>
-						<div class="feature-content">
-							<div class="product">
-								<a href="#">Electronique > </a>
-								<a href="#">Cameras</a>
-							</div>
-							<h4><a href="ads-details.html">Canon SX Powershot ...</a></h4>
-							<div class="meta-tag">
-								<span>
-									<a href="#"><i class="lni-user"></i> John Doe</a>
-								</span>
-								<span>
-									<a href="#"><i class="lni-map-marker"></i> Strasbourg</a>
-								</span>
-								<span>
-									<a href="#"><i class="lni-tag"></i> Canon</a>
-								</span>
-							</div>
-							<p class="dsc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
-							<div class="listing-bottom">
-								<h3 class="price float-left">200.00€</h3>
-								<a href="ads-details.html" class="btn btn-common float-right">Voir les details</a>
+				 {% for annonce in annonces %}
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+						<div class="featured-box">
+							<figure>
+								<div class="icon">
+									<span class="bg-green"><i class="lni-heart"></i></span>
+									<span><i class="lni-bookmark"></i></span>
+								</div>
+								<a href="{{ path('annonceSingle', {id: annonce.id}) }}"><img class="img-fluid" src="{{ asset(annonce.image) }}" alt="" style="max-height:200px;max-width:300px"></a>
+							</figure>
+							<div class="feature-content">
+								<div class="product">
+									<a href="#">{{ annonce.categorie.nom }}</a>
+								</div>
+								<h4><a href="{{ path('annonceSingle', {id: annonce.id}) }}">{{ annonce.titre }}</a></h4>
+								<div class="meta-tag">
+									<span>
+										<a href="#"><i class="lni-user"></i> {{ annonce.user.prenom }}</a>
+									</span>
+									<span>
+										<a href="#"><i class="lni-map-marker"></i> {{ annonce.ville }}</a>
+									</span>
+								</div>
+								<p class="dsc"> {{ annonce.description }} </p>
+								<div class="listing-bottom">
+									<h3 class="price float-left" style="margin-right:15px">{{ annonce.prix }}€</h3>
+									<a href="{{ path('annonceSingle', {id: annonce.id}) }}" class="btn btn-common float-right" style="float:right">Voir les détails</a>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
-					<div class="featured-box">
-						<figure>
-							<span class="price-save">
-								Économisez 25%
-							</span>
-							<div class="icon">
-								<span class="bg-green"><i class="lni-heart"></i></span>
-								<span><i class="lni-bookmark"></i></span>
-							</div>
-							<a href="#"><img class="img-fluid" src="assets/img/featured/img-2.jpg" alt=""></a>
-						</figure>
-						<div class="feature-content">
-							<div class="product">
-								<a href="#">Telephone > </a>
-								<a href="#">Ordinateurs</a>
-							</div>
-							<h4><a href="ads-details.html">Apple Macbook Pro ...</a></h4>
-							<div class="meta-tag">
-								<span>
-									<a href="#"><i class="lni-user"></i> Sara Doe</a>
-								</span>
-								<span>
-									<a href="#"><i class="lni-map-marker"></i> Mulhouse</a>
-								</span>
-								<span>
-									<a href="#"><i class="lni-tag"></i> Telephone</a>
-								</span>
-							</div>
-							<p class="dsc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
-							<div class="listing-bottom">
-								<h3 class="price float-left">400.00€</h3>
-								<a href="ads-details.html" class="btn btn-common float-right">Voir les details</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
-					<div class="featured-box">
-						<figure>
-							<div class="icon">
-								<span class="bg-green"><i class="lni-heart"></i></span>
-								<span><i class="lni-bookmark"></i></span>
-							</div>
-							<a href="#"><img class="img-fluid" src="assets/img/featured/img-3.jpg" alt=""></a>
-						</figure>
-						<div class="feature-content">
-							<div class="product">
-								<a href="#">Vehicule > </a>
-								<a href="#">Voiture</a>
-							</div>
-							<h4><a href="ads-details.html">Mercedes Benz E200 ...</a></h4>
-							<div class="meta-tag">
-								<span>
-									<a href="#"><i class="lni-user"></i> John Doe</a>
-								</span>
-								<span>
-									<a href="#"><i class="lni-map-marker"></i> Colmar</a>
-								</span>
-								<span>
-									<a href="#"><i class="lni-tag"></i> Vehicule</a>
-								</span>
-							</div>
-							<p class="dsc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
-							<div class="listing-bottom">
-								<h3 class="price float-left">23000.00€</h3>
-								<a href="ads-details.html" class="btn btn-common float-right">Voir les details</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
-					<div class="featured-box">
-						<figure>
-							<span class="price-save">
-								Économisez 25%
-							</span>
-							<div class="icon">
-								<span class="bg-green"><i class="lni-heart"></i></span>
-								<span><i class="lni-bookmark"></i></span>
-							</div>
-							<a href="#"><img class="img-fluid" src="assets/img/featured/img-4.jpg" alt=""></a>
-						</figure>
-						<div class="feature-content">
-							<div class="product">
-								<a href="#">Divers > </a>
-								<a href="#">Sac</a>
-							</div>
-							<h4><a href="ads-details.html">Sac en cuir marron ...</a></h4>
-							<div class="meta-tag">
-								<span>
-									<a href="#"><i class="lni-user"></i> Sara Doe</a>
-								</span>
-								<span>
-									<a href="#"><i class="lni-map-marker"></i> Strasbourg</a>
-								</span>
-								<span>
-									<a href="#"><i class="lni-tag"></i> Gucci</a>
-								</span>
-							</div>
-							<p class="dsc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
-							<div class="listing-bottom">
-								<h3 class="price float-left">150.03€</h3>
-								<a href="ads-details.html" class="btn btn-common float-right">Voir les details</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
-					<div class="featured-box">
-						<figure>
-							<div class="icon">
-								<span class="bg-green"><i class="lni-heart"></i></span>
-								<span><i class="lni-bookmark"></i></span>
-							</div>
-							<a href="#"><img class="img-fluid" src="assets/img/featured/img-5.jpg" alt=""></a>
-						</figure>
-						<div class="feature-content">
-							<div class="product">
-								<a href="#">Telephone > </a>
-								<a href="#">Apple</a>
-							</div>
-							<h4><a href="ads-details.html">Iphonex 6 Plus Factor ...</a></h4>
-							<div class="meta-tag">
-								<span>
-									<a href="#"><i class="lni-user"></i> Jhon Doe</a>
-								</span>
-								<span>
-									<a href="#"><i class="lni-map-marker"></i> Colmar</a>
-								</span>
-								<span>
-									<a href="#"><i class="lni-tag"></i> Apple</a>
-								</span>
-							</div>
-							<p class="dsc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
-							<div class="listing-bottom">
-								<h3 class="price float-left">500.00€</h3>
-								<a href="ads-details.html" class="btn btn-common float-right">Voir les details</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
-					<div class="featured-box">
-						<figure>
-							<span class="price-save">
-								Économisez 25%
-							</span>
-							<div class="icon">
-								<span class="bg-green"><i class="lni-heart"></i></span>
-								<span><i class="lni-bookmark"></i></span>
-							</div>
-							<a href="#"><img class="img-fluid" src="assets/img/featured/img-6.jpg" alt=""></a>
-						</figure>
-						<div class="feature-content">
-							<div class="product">
-								<a href="#">Meubles > </a>
-								<a href="#">Cuisine</a>
-							</div>
-							<h4><a href="ads-details.html">Table de salle à manger en bois ...</a></h4>
-							<div class="meta-tag">
-								<span>
-									<a href="#"><i class="lni-user"></i> John Doe</a>
-								</span>
-								<span>
-									<a href="#"><i class="lni-map-marker"></i> Schiltigheim</a>
-								</span>
-								<span>
-									<a href="#"><i class="lni-tag"></i> Ikea</a>
-								</span>
-							</div>
-							<p class="dsc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
-							<div class="listing-bottom">
-								<h3 class="price float-left">120.00€</h3>
-								<a href="ads-details.html" class="btn btn-common float-right">Voir les details</a>
-							</div>
-						</div>
-					</div>
-				</div>
+				 {% endfor %}
 			</div>
 		</div>
 	</section>

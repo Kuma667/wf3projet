@@ -3,29 +3,31 @@
 {% block title %}Historique de recherche - Alsannonces{% endblock %}
 
 {% block body %}
-	
-	{% include '/_partials/searchBar.html.twig' %}
-	
-	<h1 class="text-center mb-5"> Historique de recherche </h1>
-	<table class="table">
-		<thead>
-			<tr>
-			  <th scope="col">#</th>
-			  <th scope="col">Recherche</th>
-			  <th scope="col">Date</th>
-			</tr>
-	 	</thead>
-		
-		<tbody>
-		{% for search in app.user.historiques %}
-			<tr>
-				<th scope="row">{{ search.id }}</th>
-				<td><a href="{{ search.urlHistorique }}">{{ search.urlHistorique }}</a></td>
-				<td>{{ search.createdAt.format('Y-m-d H:i') }}</td>
-			</tr>
-		{% endfor %}
-		</tbody>
-	</table>
-	
+	<div class="container mb-5">
+		{% include '/_partials/searchBar.html.twig' %}
+		<div class="row p-5">
+			<div class="col-md-12">
+				<h1 class="text-center mb-5"> Historique de recherche </h1>
+				<table class="table">
+					<thead>
+						<tr>
+						  <th scope="col">#</th>
+						  <th scope="col">Recherche</th>
+						  <th scope="col">Date</th>
+						</tr>
+					</thead>
 
+					<tbody>
+					{% for search in app.user.historiques %}
+						<tr>
+							<th scope="row">{{ search.id }}</th>
+							<td><a href="{{ search.urlHistorique }}">{{ search.urlHistorique }}</a></td>
+							<td>{{ search.createdAt.format('Y-m-d H:i') }}</td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 {% endblock %}

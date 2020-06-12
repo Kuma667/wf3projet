@@ -3,36 +3,64 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
-	<div class="container mb-5">
-    {% for flashError in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-    {% endfor %}
-
-    <h1>Inscription</h1>
-
-    {{ form_start(registrationForm) }}
-		<div class="row">
-			<div class="col-md-6">
-				{{ form_row(registrationForm.nom) }}
-			</div>
-			<div class="col-md-6">
-				{{ form_row(registrationForm.prenom) }}
+	<div class="page-header" style="background: url(assets/img/banner1.jpg);">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="breadcrumb-wrapper">
+						<h2 class="product-title">Rejoignez-nous</h2>
+						<ol class="breadcrumb">
+							<li><a href="#">Accueil /</a></li>
+							<li class="current">Inscription</li>
+						</ol>
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-6">
-        		{{ form_row(registrationForm.email) }}
-			</div>
-			<div class="col-md-6">
-				{{ form_row(registrationForm.numtel) }}
-			</div>
-		</div>
-        {{ form_row(registrationForm.password, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn btn-success" style="width:100%">Valider</button>
-    {{ form_end(registrationForm) }}
 	</div>
+	
+	<section class="register section-padding">
+		<div class="container mt-5">
+			<div class="row justify-content-center">
+				<div class="col-lg-5 col-md-12 col-xs-12">
+					<div class="register-form login-area">
+						<h3>
+							Inscription
+						</h3>
+						{% for flashError in app.flashes('verify_email_error') %}
+							<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+						{% endfor %}
+							 {{ form_start(registrationForm) }}
+								<div class="form-group">
+									{{ form_row(registrationForm.nom) }}
+								</div>
+								<div class="form-group">
+									{{ form_row(registrationForm.prenom) }}
+								</div>
+								<div class="form-group">
+									{{ form_row(registrationForm.email) }}
+								</div>
+								<div class="form-group">
+									{{ form_row(registrationForm.numtel) }}
+								</div>
+								<div class="form-group">
+									{{ form_row(registrationForm.password, {
+										label: 'Password'
+									}) }}
+								</div>
+								<div class="form-group mb-3">
+									<div class="custom-control custom-checkbox">
+										 {{ form_row(registrationForm.agreeTerms) }}
+									</div>
+								</div>
+								<div class="text-center">
+									<button type="submit" class="btn btn-common log-btn form-control">S'inscrire</button>
+								</div>
+							{{ form_end(registrationForm) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
 {% endblock %}

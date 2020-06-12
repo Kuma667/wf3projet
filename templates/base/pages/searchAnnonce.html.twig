@@ -38,7 +38,8 @@
 							</select>
 					</div>
 					<div class="col-md-9">
-						<span class="btn btn-warning" id="saveSearchBtn">Enregistrer la recherche</span>
+						<span class="btn btn-warning mb-3" id="saveSearchBtn">Enregistrer la recherche</span>
+							{% include '/_partials/flash.html.twig' %}
 					</div>
 				</div>
 			</form>
@@ -151,8 +152,8 @@
                                                     <span><i class="lni-bookmark"></i></span>
                                                 </div>
 -->
-                                                <a href="#"><img class="img-fluid" src="{{ asset(annonce.image) }}"
-                                                        alt=""></a>
+                                                <a href="{{ path('annonceSingle', {id: annonce.id}) }}"><img class="img-fluid" src="{{ asset(annonce.image) }}"
+                                                        alt="" style="max-height:200px;max-width:300px"></a>
                                             </figure>
                                             <div class="feature-content">
                                                 <div class="product">
@@ -174,7 +175,7 @@
                                                 <div class="listing-bottom">
                                                     <h3 class="price float-left">{{ annonce.prix }}€</h3>
                                                     <a href="{{ path('annonceSingle', {id: annonce.id}) }}" class="btn btn-common float-right">Voir
-                                                        les Details</a>
+                                                        les détails</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -239,8 +240,8 @@
                                                     <span><i class="lni-bookmark"></i></span>
                                                 </div>
 -->
-                                                <a href="#"><img class="img-fluid" src="{{ asset(annonce.image) }}"
-                                                        alt=""></a>
+                                                <a href="{{ path('annonceSingle', {id: annonce.id}) }}"><img class="img-fluid" src="{{ asset(annonce.image) }}"
+                                                        alt="" style="max-height:200px;max-width:300px"></a>
                                             </figure>
                                             <div class="feature-content">
                                                 <div class="product">
@@ -262,7 +263,7 @@
                                                 <div class="listing-bottom">
                                                     <h3 class="price float-left">{{ annonce.prix }}€</h3>
                                                     <a href="{{ path('annonceSingle', {id: annonce.id}) }}" class="btn btn-common float-right">Voir
-                                                        les Details</a>
+                                                        les détails</a>
                                                 </div>
                                             </div>
                                         </div>
