@@ -4,6 +4,320 @@
 
 {% block body %}
 	{% include '/_partials/flash.html.twig' %}
-	{% include '/_partials/searchBar.html.twig' %}
+	
+	<div id="hero-area">
+			<div class="overlay"></div>
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-md-12 col-lg-9 col-xs-12 text-center">
+						<div class="contents">
+							<h1 class="head-title">Bienvenue sur le plus grand <br><span class="year">site d'annonces d'Alsace</span></h1>
+							<p>Achetez et vendez de tout. Des voitures d'occasion, téléphones portables, ordinateurs.. ou recherchez des biens, emplois et bien plus encore.</p>
+							{% include '/_partials/searchBar.html.twig' %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</header>
+	
+	<section class="featured section-padding">
+		<div class="container">
+			<h1 class="section-title">Les dernières annonces</h1>
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+					<div class="featured-box">
+						<figure>
+							<div class="icon">
+								<span class="bg-green"><i class="lni-heart"></i></span>
+								<span><i class="lni-bookmark"></i></span>
+							</div>
+							<a href="#"><img class="img-fluid" src="assets/img/featured/img-1.jpg" alt=""></a>
+						</figure>
+						<div class="feature-content">
+							<div class="product">
+								<a href="#">Electronique > </a>
+								<a href="#">Cameras</a>
+							</div>
+							<h4><a href="ads-details.html">Canon SX Powershot ...</a></h4>
+							<div class="meta-tag">
+								<span>
+									<a href="#"><i class="lni-user"></i> John Doe</a>
+								</span>
+								<span>
+									<a href="#"><i class="lni-map-marker"></i> Strasbourg</a>
+								</span>
+								<span>
+									<a href="#"><i class="lni-tag"></i> Canon</a>
+								</span>
+							</div>
+							<p class="dsc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
+							<div class="listing-bottom">
+								<h3 class="price float-left">200.00€</h3>
+								<a href="ads-details.html" class="btn btn-common float-right">Voir les details</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+					<div class="featured-box">
+						<figure>
+							<span class="price-save">
+								Économisez 25%
+							</span>
+							<div class="icon">
+								<span class="bg-green"><i class="lni-heart"></i></span>
+								<span><i class="lni-bookmark"></i></span>
+							</div>
+							<a href="#"><img class="img-fluid" src="assets/img/featured/img-2.jpg" alt=""></a>
+						</figure>
+						<div class="feature-content">
+							<div class="product">
+								<a href="#">Telephone > </a>
+								<a href="#">Ordinateurs</a>
+							</div>
+							<h4><a href="ads-details.html">Apple Macbook Pro ...</a></h4>
+							<div class="meta-tag">
+								<span>
+									<a href="#"><i class="lni-user"></i> Sara Doe</a>
+								</span>
+								<span>
+									<a href="#"><i class="lni-map-marker"></i> Mulhouse</a>
+								</span>
+								<span>
+									<a href="#"><i class="lni-tag"></i> Telephone</a>
+								</span>
+							</div>
+							<p class="dsc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
+							<div class="listing-bottom">
+								<h3 class="price float-left">400.00€</h3>
+								<a href="ads-details.html" class="btn btn-common float-right">Voir les details</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+					<div class="featured-box">
+						<figure>
+							<div class="icon">
+								<span class="bg-green"><i class="lni-heart"></i></span>
+								<span><i class="lni-bookmark"></i></span>
+							</div>
+							<a href="#"><img class="img-fluid" src="assets/img/featured/img-3.jpg" alt=""></a>
+						</figure>
+						<div class="feature-content">
+							<div class="product">
+								<a href="#">Vehicule > </a>
+								<a href="#">Voiture</a>
+							</div>
+							<h4><a href="ads-details.html">Mercedes Benz E200 ...</a></h4>
+							<div class="meta-tag">
+								<span>
+									<a href="#"><i class="lni-user"></i> John Doe</a>
+								</span>
+								<span>
+									<a href="#"><i class="lni-map-marker"></i> Colmar</a>
+								</span>
+								<span>
+									<a href="#"><i class="lni-tag"></i> Vehicule</a>
+								</span>
+							</div>
+							<p class="dsc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
+							<div class="listing-bottom">
+								<h3 class="price float-left">23000.00€</h3>
+								<a href="ads-details.html" class="btn btn-common float-right">Voir les details</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+					<div class="featured-box">
+						<figure>
+							<span class="price-save">
+								Économisez 25%
+							</span>
+							<div class="icon">
+								<span class="bg-green"><i class="lni-heart"></i></span>
+								<span><i class="lni-bookmark"></i></span>
+							</div>
+							<a href="#"><img class="img-fluid" src="assets/img/featured/img-4.jpg" alt=""></a>
+						</figure>
+						<div class="feature-content">
+							<div class="product">
+								<a href="#">Divers > </a>
+								<a href="#">Sac</a>
+							</div>
+							<h4><a href="ads-details.html">Sac en cuir marron ...</a></h4>
+							<div class="meta-tag">
+								<span>
+									<a href="#"><i class="lni-user"></i> Sara Doe</a>
+								</span>
+								<span>
+									<a href="#"><i class="lni-map-marker"></i> Strasbourg</a>
+								</span>
+								<span>
+									<a href="#"><i class="lni-tag"></i> Gucci</a>
+								</span>
+							</div>
+							<p class="dsc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
+							<div class="listing-bottom">
+								<h3 class="price float-left">150.03€</h3>
+								<a href="ads-details.html" class="btn btn-common float-right">Voir les details</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+					<div class="featured-box">
+						<figure>
+							<div class="icon">
+								<span class="bg-green"><i class="lni-heart"></i></span>
+								<span><i class="lni-bookmark"></i></span>
+							</div>
+							<a href="#"><img class="img-fluid" src="assets/img/featured/img-5.jpg" alt=""></a>
+						</figure>
+						<div class="feature-content">
+							<div class="product">
+								<a href="#">Telephone > </a>
+								<a href="#">Apple</a>
+							</div>
+							<h4><a href="ads-details.html">Iphonex 6 Plus Factor ...</a></h4>
+							<div class="meta-tag">
+								<span>
+									<a href="#"><i class="lni-user"></i> Jhon Doe</a>
+								</span>
+								<span>
+									<a href="#"><i class="lni-map-marker"></i> Colmar</a>
+								</span>
+								<span>
+									<a href="#"><i class="lni-tag"></i> Apple</a>
+								</span>
+							</div>
+							<p class="dsc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
+							<div class="listing-bottom">
+								<h3 class="price float-left">500.00€</h3>
+								<a href="ads-details.html" class="btn btn-common float-right">Voir les details</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+					<div class="featured-box">
+						<figure>
+							<span class="price-save">
+								Économisez 25%
+							</span>
+							<div class="icon">
+								<span class="bg-green"><i class="lni-heart"></i></span>
+								<span><i class="lni-bookmark"></i></span>
+							</div>
+							<a href="#"><img class="img-fluid" src="assets/img/featured/img-6.jpg" alt=""></a>
+						</figure>
+						<div class="feature-content">
+							<div class="product">
+								<a href="#">Meubles > </a>
+								<a href="#">Cuisine</a>
+							</div>
+							<h4><a href="ads-details.html">Table de salle à manger en bois ...</a></h4>
+							<div class="meta-tag">
+								<span>
+									<a href="#"><i class="lni-user"></i> John Doe</a>
+								</span>
+								<span>
+									<a href="#"><i class="lni-map-marker"></i> Schiltigheim</a>
+								</span>
+								<span>
+									<a href="#"><i class="lni-tag"></i> Ikea</a>
+								</span>
+							</div>
+							<p class="dsc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
+							<div class="listing-bottom">
+								<h3 class="price float-left">120.00€</h3>
+								<a href="ads-details.html" class="btn btn-common float-right">Voir les details</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section class="works section-padding">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<h3 class="section-title">Comment ça fonctionne?</h3>
+				</div>
+				<div class="col-lg-4 col-md-4 col-xs-12">
+					<div class="works-item">
+						<div class="icon-box">
+							<i class="lni-users"></i>
+						</div>
+						<p><a style="color: #3281a8" href="{{ path('app_register') }}">Créer un compte</a></p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-xs-12">
+					<div class="works-item">
+						<div class="icon-box">
+							<i class="lni-bookmark-alt"></i>
+						</div>
+						<p><a style="color: #3281a8" href="{{ path('ajoutAnnonce') }}">Publier une annonce gratuite</a></p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-xs-12">
+					<div class="works-item">
+						<div class="icon-box">
+							<i class="lni-thumbs-up"></i>
+						</div>
+						<p style="color: #3281a8">Affaire conclue</p>
+					</div>
+				</div>
+				<hr class="works-line">
+			</div>
+		</div>
+	</section>
+	
+	<section class="testimonial section-padding">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div id="testimonials" class="owl-carousel">
+						<div class="item">
+							<div class="img-thumb">
+								<img src="assets/img/testimonial/img1.png" alt="">
+							</div>
+							<div class="testimonial-item">
+								<div class="content">
+									<p class="description">Eiusmod tempor incidiunt labore velit dolore magna aliqu sed eniminim veniam quis nostrud exercition eullamco laborisaa, Eiusmod tempor incidiunt labore velit dolore magna.</p>
+									<div class="info-text">
+										<h2><a href="#">John Doe</a></h2>
+										<h4><a href="#">Vendeur</a></h4>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="item">
+							<div class="item">
+								<div class="img-thumb">
+									<img src="assets/img/testimonial/img2.png" alt="">
+								</div>
+								<div class="testimonial-item">
+									<div class="content">
+										<p class="description">Eiusmod tempor incidiunt labore velit dolore magna aliqu sed eniminim veniam quis nostrud exercition eullamco laborisaa, Eiusmod tempor incidiunt labore velit dolore magna.</p>
+										<div class="info-text">
+											<h2><a href="#">Lucile</a></h2>
+											<h4><a href="#">Acheteuse</a></h4>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
 {% endblock %}

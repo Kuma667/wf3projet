@@ -10,6 +10,7 @@ use App\Repository\ImagesRepository;
 use App\Entity\Historique;
 use App\Entity\User;
 use App\Entity\Images;
+use App\Service\EmailService;
 use App\Repository\AnnoncesRepository;
 use App\Repository\CategoriesRepository;
 use App\Form\AnnoncesType;
@@ -88,6 +89,29 @@ class BaseController extends AbstractController
 			'cats' => $cats
         ]);
     }
+	
+	/**
+     * @Route("/contact-pro", name="contactPro")
+     */
+	public function contactPro(Request $request, EmailService $emailService){
+		
+		if($request->isMethod('POST')){
+			$nom = $request->request->get('nom');
+			$prenom = $request->request->get('prenom');
+			$sujet = $request->request->get('sujet');
+			$mail = $request->request->get('email');
+			$msg = $request->request->get('message');
+			$userMail = $request->request->get('userMail');
+			
+			// Envoi de l'email
+			$send = $emailService->sendMailPro($nom, $prenom, $sujet, $mail, $msg, $userMail);
+			$this->addFlash('success', 'Votre message a bien été envoyé.');
+			$referer = filter_var($request->headers->get('referer'), FILTER_SANITIZE_URL);
+			//return $this->redirectToRoute('contactPro');
+		}
+		
+		return $this->redirect($referer);
+	}
 
 
     

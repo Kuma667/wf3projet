@@ -42,35 +42,21 @@ class EmailService{
         $this->mailer->send($mail);
 	}
 	
-	public function sendMailPro($nom, $prenom, $societe, $sujet, $mail, $message){
+	public function sendMailPro($nom, $prenom, $sujet, $mail, $message, $userMail){
 		$msg = (new TemplatedEmail())
             ->from($mail)
-            ->to($this->MY_EMAIL)
+            ->to($userMail)
             ->subject($sujet)
 			->htmlTemplate('email/contactPro.email.twig')
     		->context([
 				'nom' => $nom,
 				'prenom' => $prenom,
-				'societe' => $societe,
 				'sujet' => $sujet,
 				'mail' => $mail,
 				'message' => $message,
 			]);
 
         $this->mailer->send($msg);
-		
-		$accuseMail = (new TemplatedEmail())
-			->from('contact@cyrilrahmoun.fr')
-			->to($mail)
-			->subject('Accusé de réception de votre mail')
-			->htmlTemplate('email/accuse.email.twig')
-			->context([
-				'nom' => $nom,
-				'prenom' => $prenom,
-				'mail' => $mail
-			]);
-		
-		$this->mailer->send($accuseMail);
 	}
 	
 	public function sendToken(User $user){

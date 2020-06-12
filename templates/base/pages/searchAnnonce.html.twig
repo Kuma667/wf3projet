@@ -6,55 +6,332 @@
 
 {% block body %}
 
-	<form class="pull-right hidden mb-5 mt-5" role="search" id="searchForm" method="GET" action="">
-       
-			<div class="row mb-3">
-				<div class="col-md-2">
-					<select name="categorie" class="form-control">
-					 {% for cat in cats %}
-						 <option value="{{ cat.slug }}"> {{ cat.nom }}</option> 
-					 {% endfor %}
-					</select>
+
+	<div class="container">
+	<div class="search-bar mb-5">
+		<div class="search-inner">
+			<form class="search-form" role="search" id="searchForm" method="GET" action="{{ path('searchResult') }}">
+				<div class="row mb-3">
+					<div class="form-group inputwithicon">
+						<div class="select">
+							<select name="categorie">
+								<option value="selectCategorie" disabled selected>Choisir une catégorie</option>
+								{% for cat in cats %}
+									<option value="{{ cat.slug }}"> {{ cat.nom }}</option> 
+								{% endfor %}
+							</select>
+						</div>
+						<i class="lni-menu"></i>
 					</div>
-					<div class="col-md-6">
-						<input type="text" class="form-control" placeholder="Search" name="search" value="{{ app.request.query.get('search') }}">
+					<div class="form-group">
+						<input type="text" name="search" value="{{ app.request.query.get('search') }}" class="form-control" placeholder="Que recherchez-vous?">
 						<input type="hidden" value="0" name="saveSearch" id="saveSearch">
 					</div>
-					<div class="col-md-4">
-						<span class="input-group-btn">
-							<button type="submit" class="btn btn-primary">Valider</button>
-							<span class="btn btn-warning" id="saveSearchBtn">Enregistrer la recherche</span>
-						</span>
+					<button class="btn btn-common" type="submit"><i class="lni-search"></i> Rechercher </button>
+				</div>
+				<div class="row">
+					<div class="col-md-3">
+							<select id="triSelect" class="form-control" name="order">
+								<option value="" disabled selected>Trier par..</option>
+								<option value="prix">Prix</option>
+								<option value="date">Date</option>
+							</select>
 					</div>
-			</div>
-			<div class="row">
-				<div class="col-md-3">
-						<select id="triSelect" class="form-control" name="order">
-							<option value="" disabled selected>Trier par..</option>
-							<option value="prix">Prix</option>
-							<option value="date">Date</option>
-						</select>
+					<div class="col-md-9">
+						<span class="btn btn-warning" id="saveSearchBtn">Enregistrer la recherche</span>
+					</div>
 				</div>
-				<div class="col-md-9"></div>
-				
-			</div>
-      </form>
+			</form>
+		</div>
+	</div>
 	
-		
-		{% for annonce in res %}
-			<div class="row mb-3">
-				<div class="col-md-4">
-					<a href="{{ path('annonceSingle', {id: annonce.id}) }}"><img class="img-fluid" style="max-width:300px" src="{{ asset(annonce.image) }}"></a>
-				</div>
-				<div class="col-md-8">
-					<a href="{{ path('annonceSingle', {id: annonce.id}) }}"><p class="lead">{{ annonce.titre }}</p></a>
-					<p class="lead">{{ annonce.prix }}€</p>
-					<p class="lead">{{ annonce.ville }}</p>
-					<p class="">{{ annonce.createdAt.format('Y-m-d H:i') }}</p>
-				</div>
-			
-			</div>
-		{% endfor %}
+		 <div class="main-container section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-12 col-xs-12 page-sidebar">
+                    <aside>
+
+<!--
+                        <div class="widget_search">
+                            <form role="search" id="search-form">
+                                <input type="search" class="form-control" autocomplete="off" name="s"
+                                    placeholder="Recherche..." id="search-input" value="">
+                                <button type="submit" id="search-submit" class="search-btn"><i
+                                        class="lni-search"></i></button>
+                            </form>
+                        </div>
+-->
+
+<!--
+                        <div class="widget categories">
+                            <h4 class="widget-title">Toutes catégories</h4>
+                            <ul class="categories-list">
+                                <li>
+                                    <a href="#">
+                                        <i class="lni-dinner"></i>
+                                        Hôtel et voyages <span class="category-counter">(5)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="lni-control-panel"></i>
+                                        Services <span class="category-counter">(8)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="lni-github"></i>
+                                        Animeaux <span class="category-counter">(2)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="lni-coffee-cup"></i>
+                                        Restaurants <span class="category-counter">(3)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="lni-home"></i>
+                                        Immobilier <span class="category-counter">(4)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="lni-pencil"></i>
+                                        Emplois <span class="category-counter">(5)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="lni-display"></i>
+                                        Electronique <span class="category-counter">(9)</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+-->
+                    
+                    </aside>
+                </div>
+                <div class="col-lg-9 col-md-12 col-xs-12 page-content">
+
+                    <div class="product-filter">
+                        <div class="short-name">
+                            <span>Afficher (1 - 12 produits sur 7371 produits)</span>
+                        </div>
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#grid-view"><i class="lni-grid"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#list-view"><i
+                                        class="lni-list"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <div class="adds-wrapper">
+                        <div class="tab-content">
+                            <div id="grid-view" class="tab-pane fade">
+                                <div class="row">
+									{% for annonce in res %}
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="featured-box">
+                                            <figure>
+<!--
+                                                <span class="price-save">
+                                                    Économisez 25%
+                                                </span>
+-->
+<!--
+                                                <div class="icon">
+                                                    <span class="bg-green"><i class="lni-heart"></i></span>
+                                                    <span><i class="lni-bookmark"></i></span>
+                                                </div>
+-->
+                                                <a href="#"><img class="img-fluid" src="{{ asset(annonce.image) }}"
+                                                        alt=""></a>
+                                            </figure>
+                                            <div class="feature-content">
+                                                <div class="product">
+                                                    {{ annonce.categorie.nom }}
+                                                </div>
+                                                <h4><a href="{{ path('annonceSingle', {id: annonce.id}) }}">{{ annonce.titre }}</a></h4>
+                                                <div class="meta-tag">
+                                                    <span>
+                                                        <i class="lni-user"></i> {{ annonce.user.prenom}} {{ annonce.user.nom }}
+                                                    </span>
+                                                    <span>
+                                                        <i class="lni-map-marker"></i> {{ annonce.ville }}
+                                                    </span>
+													<span>
+                                                        <i class="lni-tag"></i> {{ annonce.createdAt.format('d-m-Y H:i') }}
+                                                    </span>
+                                                </div>
+                                                <p class="dsc">{{ annonce.description }}</p>
+                                                <div class="listing-bottom">
+                                                    <h3 class="price float-left">{{ annonce.prix }}€</h3>
+                                                    <a href="{{ path('annonceSingle', {id: annonce.id}) }}" class="btn btn-common float-right">Voir
+                                                        les Details</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+									{% endfor %}
+<!--	
+									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <div class="featured-box">
+                                            <figure>
+                                                <span class="price-save">
+                                                    Économisez 25%
+                                                </span>
+                                                <div class="icon">
+                                                    <span class="bg-green"><i class="lni-heart"></i></span>
+                                                    <span><i class="lni-bookmark"></i></span>
+                                                </div>
+                                                <a href="#"><img class="img-fluid" src="assets/img/featured/img-1.jpg"
+                                                        alt=""></a>
+                                            </figure>
+                                            <div class="feature-content">
+                                                <div class="product">
+                                                    <a href="#">Electronique > </a>
+                                                    <a href="#">Apple</a>
+                                                </div>
+                                                <h4><a href="ads-details.html">Canon SX Powershot ...</a></h4>
+                                                <div class="meta-tag">
+                                                    <span>
+                                                        <a href="#"><i class="lni-user"></i> John Doe</a>
+                                                    </span>
+                                                    <span>
+                                                        <a href="#"><i class="lni-map-marker"></i> Strasbourg</a>
+                                                    </span>
+                                                    <span>
+                                                        <a href="#"><i class="lni-tag"></i> Apple</a>
+                                                    </span>
+                                                </div>
+                                                <p class="dsc">Lorem Ipsum is simply dummy text of the printing and
+                                                    typesetting industry. Lorem Ipsum has been the industry.</p>
+                                                <div class="listing-bottom">
+                                                    <h3 class="price float-left">250.00€</h3>
+                                                    <a href="ads-details.html" class="btn btn-common float-right">Voir
+                                                        les Details</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+-->
+                                </div>
+                            </div>
+                            <div id="list-view" class="tab-pane fade active show">
+                                <div class="row">
+									{% for annonce in res %}
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <div class="featured-box">
+                                            <figure>
+<!--
+                                                <span class="price-save">
+                                                    Économisez 25%
+                                                </span>
+                                                <div class="icon">
+                                                    <span class="bg-green"><i class="lni-heart"></i></span>
+                                                    <span><i class="lni-bookmark"></i></span>
+                                                </div>
+-->
+                                                <a href="#"><img class="img-fluid" src="{{ asset(annonce.image) }}"
+                                                        alt=""></a>
+                                            </figure>
+                                            <div class="feature-content">
+                                                <div class="product">
+                                                    {{ annonce.categorie.nom }}
+                                                </div>
+                                                <h4><a href="{{ path('annonceSingle', {id: annonce.id}) }}">{{ annonce.titre }}</a></h4>
+                                                <div class="meta-tag">
+                                                    <span>
+                                                        <i class="lni-user"></i> {{ annonce.user.prenom }}
+                                                    </span>
+                                                    <span>
+                                                        <i class="lni-map-marker"></i> {{ annonce.ville }}
+                                                    </span>
+                                                    <span>
+                                                        <i class="lni-tag"></i> {{ annonce.createdAt.format('d-m-Y H:i') }}
+                                                    </span>
+                                                </div>
+                                                <p class="dsc">{{ annonce.description }}</p>
+                                                <div class="listing-bottom">
+                                                    <h3 class="price float-left">{{ annonce.prix }}€</h3>
+                                                    <a href="{{ path('annonceSingle', {id: annonce.id}) }}" class="btn btn-common float-right">Voir
+                                                        les Details</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+									{% endfor %}
+<!--
+									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <div class="featured-box">
+                                            <figure>
+                                                <span class="price-save">
+                                                    Économisez 25%
+                                                </span>
+                                                <div class="icon">
+                                                    <span class="bg-green"><i class="lni-heart"></i></span>
+                                                    <span><i class="lni-bookmark"></i></span>
+                                                </div>
+                                                <a href="#"><img class="img-fluid" src="assets/img/featured/img-1.jpg"
+                                                        alt=""></a>
+                                            </figure>
+                                            <div class="feature-content">
+                                                <div class="product">
+                                                    <a href="#">Electronique > </a>
+                                                    <a href="#">Apple</a>
+                                                </div>
+                                                <h4><a href="ads-details.html">Canon SX Powershot ...</a></h4>
+                                                <div class="meta-tag">
+                                                    <span>
+                                                        <a href="#"><i class="lni-user"></i> John Doe</a>
+                                                    </span>
+                                                    <span>
+                                                        <a href="#"><i class="lni-map-marker"></i> Strasbourg</a>
+                                                    </span>
+                                                    <span>
+                                                        <a href="#"><i class="lni-tag"></i> Apple</a>
+                                                    </span>
+                                                </div>
+                                                <p class="dsc">Lorem Ipsum is simply dummy text of the printing and
+                                                    typesetting industry. Lorem Ipsum has been the industry.</p>
+                                                <div class="listing-bottom">
+                                                    <h3 class="price float-left">250.00€</h3>
+                                                    <a href="ads-details.html" class="btn btn-common float-right">Voir
+                                                        les Details</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="pagination-bar">
+                        <nav>
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item"><a class="page-link active" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">Suivant</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+	</div>
 	
 	
 {% endblock %}

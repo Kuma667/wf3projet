@@ -80,7 +80,7 @@ class MembreController extends AbstractController
 				$annonce->addImage($img);
 			}
 
-			$em = $this->getDoctrine()->getManager();
+				$em = $this->getDoctrine()->getManager();
 				$annonce->setUser($this->getUser());
 				$em->persist($annonce);
 				$em->flush();
@@ -89,7 +89,7 @@ class MembreController extends AbstractController
 				return $this->redirect($request->getPathInfo());
 		}
 
-        return $this->render('/membre/modifierAnnonce.html.twig', [
+        return $this->render('/membre/ajoutAnnonce.html.twig', [
             'annoncesForm' => $form->createView(),
             'annonce' => $annonce,
             'new' => $new

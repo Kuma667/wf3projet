@@ -1,18 +1,22 @@
-<form class="pull-right hidden mt-5 mb-5" role="search" id="nav-search-form" method="GET" action="{{ path('searchResult') }}">
-<div class="row mb-3">
-	<div class="col-md-2">
-		<select name="categorie" class="form-control">
-			{% for cat in cats %}
-				<option value="{{ cat.slug }}"> {{ cat.nom }}</option> 
-			{% endfor %}
-		</select>
-	</div>
-	<div class="col-md-8">
-		<input type="text" class="form-control" placeholder="Search" name="search" value="{{ app.request.query.get('search') }}">
-		<input type="hidden" value="0" name="saveSearch" id="saveSearch">
-	</div>
-	<div class="col-md-2">
-		<button type="submit" class="btn btn-primary">Valider</button>
+<div class="search-bar">
+	<div class="search-inner">
+		<form class="search-form" role="search" id="nav-search-form" method="GET" action="{{ path('searchResult') }}">
+			<div class="form-group inputwithicon">
+				<div class="select">
+					<select name="categorie">
+						<option value="selectCategorie" disabled selected>Choisir une catégorie</option>
+						{% for cat in cats %}
+							<option value="{{ cat.slug }}"> {{ cat.nom }}</option> 
+						{% endfor %}
+					</select>
+				</div>
+				<i class="lni-menu"></i>
+			</div>
+			<div class="form-group">
+				<input type="text" name="search" value="{{ app.request.query.get('search') }}" class="form-control" placeholder="Que recherchez-vous?">
+				<input type="hidden" value="0" name="saveSearch" id="saveSearch">
+			</div>
+			<button class="btn btn-common" type="submit"><i class="lni-search"></i> Rechercher </button>
+		</form>
 	</div>
 </div>
-</form>

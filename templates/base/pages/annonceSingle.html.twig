@@ -5,21 +5,188 @@
 {% block title %}Annonce{% endblock %}
 
 {% block body %}
-	{% include '/_partials/searchBar.html.twig' %}
-	<div class="row mt-5">
-		<div class="col-md-8">
-		<h3> {{ annonce.titre }} </h3>
-		<p class="lead"> {{ annonce.description }}</p>
-		<p class="lead"> {{ annonce.prix }}€</p>
-		<p class="bold"> {{ annonce.ville }}</p>
-		{% for image in annonce.images %}
-			<img class="img-fluid" style="max-width:200px" src="{{ asset('uploads/photos/' ~ image.name) }}">
-		{% endfor %}
-	</div>
-	<div class="col-md-4">
-		<p class="lead"> <b>Vendeur :</b> {{ annonce.user.prenom }}</p>
-		<a href="" class="btn btn-info">Contacter le vendeur</a> <br><br>
-		<a href="" class="btn btn-success mb-3">Faire une offre</a> <br>
-	</div>
+	<div class="page-header" style="background: url(assets/img/banner1.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="breadcrumb-wrapper">
+                        <h2 class="product-title">Détails</h2>
+                        <ol class="breadcrumb">
+                            <li><a href="#">Accueil /</a></li>
+                            <li class="current">Détails</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 	
+	<div class="container">
+	{% include '/_partials/searchBar.html.twig' %}
+		
+
+    <div class="section-padding">
+        <div class="container mt-5 p-5">
+			{% for label, messages in app.flashes %}
+				{% for message in messages %}
+					<div class="alert alert-{{ label }}">
+						{{ message }}
+					</div>
+				{% endfor %}
+			{% endfor %}
+            <div class="product-info row">
+                <div class="col-lg-8 col-md-12 col-xs-12">
+                    <div class="ads-details-wrapper">
+                        <div id="owl-demo" class="owl-carousel owl-theme">
+							{% for image in annonce.images %}
+								<div class="item">
+									<div class="product-img">
+										<img class="img-fluid" src="{{ asset('uploads/photos/' ~ image.name) }}" alt="">
+									</div>
+									<span class="price">{{ annonce.prix }}€</span>
+								</div>
+							{% endfor %}
+                        </div>
+                    </div>
+                    <div class="details-box">
+                        <div class="ads-details-info">
+                            <h2> {{ annonce.titre }} </h2>
+                            <div class="details-meta">
+                                <span><i class="lni-alarm-clock"></i> {{ annonce.createdAt.format('d-m-Y H:i') }}</span>
+                                <span><i class="lni-map-marker"></i>{{ annonce.ville }}</span>
+                            </div>
+<!--                            <p class="mb-4">Bonjour, je met en vente mon Laptop comme neuf.</p>-->
+                            <h4 class="title-small mb-3">Description</h4>
+<!--
+                            <ul class="list-specification">
+                                <li><i class="lni-check-mark-circle"></i> 256 Go de stockage flash PCIe</li>
+                                <li><i class="lni-check-mark-circle"></i> 2.7 GHz dual-core Intel Core i5</li>
+                                <li><i class="lni-check-mark-circle"></i> Turbo Boost jusqu'à 3,1 GHz</li>
+                                <li><i class="lni-check-mark-circle"></i> Intel Iris Graphics 6100</li>
+                                <li><i class="lni-check-mark-circle"></i> 8GB mémoire</li>
+                                <li><i class="lni-check-mark-circle"></i> Autonomie de 10 heures</li>
+                                <li><i class="lni-check-mark-circle"></i> Écran Retina de 13,3 po</li>
+                                <li><i class="lni-check-mark-circle"></i> Garantie internationale de 1 an</li>
+                            </ul>
+-->
+                            <p class="mb-4">
+                                {{ annonce.description }}
+                            </p>
+                        </div>
+<!--
+                        <div class="tag-bottom">
+                            <div class="float-left">
+                                <ul class="advertisement">
+                                    <li>
+                                        <p><strong><i class="lni-folder"></i> catégories:</strong> <a
+                                                href="#">Électronique</a></p>
+                                    </li>
+                                    <li>
+                                        <p><strong><i class="lni-archive"></i> État:</strong> Comme neuf</p>
+                                    </li>
+                                    <li>
+                                        <p><strong><i class="lni-package"></i> Marque:</strong> <a href="#">Apple</a>
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="float-right">
+                                <div class="share">
+                                    <div class="social-link">
+                                        <a class="facebook" data-toggle="tooltip" data-placement="top" title="facebook"
+                                            href="#"><i class="lni-facebook-filled"></i></a>
+                                        <a class="twitter" data-toggle="tooltip" data-placement="top" title="twitter"
+                                            href="#"><i class="lni-twitter-filled"></i></a>
+                                        <a class="linkedin" data-toggle="tooltip" data-placement="top" title="linkedin"
+                                            href="#"><i class="lni-linkedin-fill"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+-->
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-xs-12">
+
+                    <aside class="details-sidebar">
+                        <div class="widget">
+                            <h4 class="widget-title">Annonce publiée par</h4>
+                            <div class="agent-inner">
+                                <div class="agent-title">
+<!--
+                                    <div class="agent-photo">
+                                        <a href="#"><img src="assets/img/productinfo/agent.jpg" alt=""></a>
+                                    </div>
+-->
+                                    <div class="agent-details" style="margin-left:0px">
+                                        <h3>{{ annonce.user.prenom }}</h3>
+                                        <span><i class="lni-phone-handset"></i>{{ annonce.user.numtel }}</span> <br>
+										<span><i class="fa fa-envelope"></i> {{ annonce.user.email }} </span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-common fullwidth mt-4" data-toggle="modal" data-target="#contactModal">Contacter le vendeur</button>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+				<div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="titreModal" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+					<div class="modal-content">
+					  <div class="modal-header">
+						<h5 class="modal-title" id="titreModal">Contacter le vendeur</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						  <span aria-hidden="true">&times;</span>
+						</button>
+					  </div>
+					  <div class="modal-body">
+						{% for label, messages in app.flashes %}
+							{% for message in messages %}
+								<div class="alert alert-{{ label }}">
+									{{ message }}
+								</div>
+							{% endfor %}
+						{% endfor %}
+							<form method="POST" action="{{ path('contactPro') }}">
+								<input type="hidden" value="{{ annonce.user.email }}" name="userMail"> 
+								<div class="row">
+									<div class="col-md-6">
+										<label for="nom">Nom</label>
+										<input name="nom" type="text" class="form-control mb-3" placeholder="Nom">
+									</div>
+									<div class="col-md-6">
+										<label for="prenom">Prénom</label>
+										<input name="prenom" type="text" class="form-control mb-3" placeholder="Prénom">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<label for="email">Votre email</label>
+										<input name="email" type="email" class="form-control mb-3" placeholder="Email">
+									</div>
+									<div class="col-md-6">
+										<label for="sujet">Sujet</label>
+										<input name="sujet" type="text" class="form-control mb-3" placeholder="Sujet">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<label for="message">Votre message</label>
+										<textarea name="message" class="form-control mb-3" placeholder="Message"></textarea>
+									</div>
+								</div>
+								<input type="hidden" name="formEnvoi">
+								<button type="submit" class="btn btn-success form-control">Envoyer</button>
+							</form>
+					  </div>
+					  <div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+<!--						<button type="button" class="btn btn-primary">Envoyer</button>-->
+					  </div>
+					</div>
+				  </div>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

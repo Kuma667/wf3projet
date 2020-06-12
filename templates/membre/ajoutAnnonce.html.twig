@@ -3,19 +3,19 @@
 {% block title %}Ajouter annonce{% endblock %}
 
 {% block body %}
-	
-	<h1>Ajouter annonce</h1>
-	{% include '/_partials/flash.html.twig' %}
- {{ form_start(annoncesForm) }}
-        {{ form_row(annoncesForm.titre) }}
-        {{ form_row(annoncesForm.description) }}
-        {{ form_row(annoncesForm.prix) }}
-        {{ form_row(annoncesForm.ville) }}
-        {{ form_row(annoncesForm.categorie) }}
-        {{ form_row(annoncesForm.images) }}
-        {{ form_row(annoncesForm.premium) }}
+	<div class="container mb-5 p-5">
+		<h1>Ajouter annonce</h1>
+		{% include '/_partials/flash.html.twig' %}
+		{{ form_start(annoncesForm) }}
+			{{ form_row(annoncesForm.titre) }}
+			{{ form_row(annoncesForm.description) }}
+			{{ form_row(annoncesForm.prix) }}
+			{{ form_row(annoncesForm.ville) }}
+			{{ form_row(annoncesForm.categorie) }}
+			{{ form_row(annoncesForm.images) }}
+			{{ form_row(annoncesForm.premium) }}
 
-	<button type="submit" class="btn">Valider</button>
-{{ form_end(annoncesForm) }}
-	
+			<button type="submit" class="btn btn-success btn-block">Valider</button>
+		{{ form_end(annoncesForm) }}
+	</div>
 {% endblock %}

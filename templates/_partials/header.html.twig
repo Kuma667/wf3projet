@@ -1,37 +1,93 @@
 {# Header content - VERIFIER LES PATHS #} 
+<header id="header-wrap">
+		<div class="top-bar">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-7 col-md-5 col-xs-12">
 
-<nav class="navbar navbar-expand-lg navbar-light bg-info">
-  <a class="navbar-brand" href="{{ path('accueil') }}">{{ PROJECT_NAME }}</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="{{ path('ajoutAnnonce') }}">Déposer une annonce</a> 
-      </li>
-		<li class="nav-item">
-                <a class="nav-link" href="{{ path('annonces') }}">Toutes les annonces</a>
-            </li>
-        {% if app.user %}
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
-            </li>
-			<li class="nav-item">
-				<a class="nav-link" href="{{ path('membre') }}">Gérer mes annonces</a> 
-      		</li>
-			<li class="nav-item">
-				<a class="nav-link" href="{{ path('historique') }}">Mes Recherches</a> 
-        	</li>
-        {% else %}
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
-            </li>
-        {% endif %}
-    </ul>
-  </div>
-</nav>
+					</div>
+					<div class="col-lg-5 col-md-7 col-xs-12">
+						<div class="roof-social float-right">
+							<a class="facebook" href="#"><i class="lni-facebook-filled"></i></a>
+							<a class="twitter" href="#"><i class="lni-twitter-filled"></i></a>
+							<a class="instagram" href="#"><i class="lni-instagram-filled"></i></a>
+							<a class="linkedin" href="#"><i class="lni-linkedin-fill"></i></a>
+						</div>
+						<div class="header-top-right float-right">
+							{% if app.user %}
+								<a href="{{ path('app_logout') }}" class="header-top-button"><i class="lni-lock"></i> Déconnexion</a>
+							{% else %}
+								<a href="{{ path('app_login') }}" class="header-top-button"><i class="lni-lock"></i> Connexion</a> |
+								<a href="{{ path('app_register') }}" class="header-top-button"><i class="lni-pencil"></i> Inscription</a>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
+		<!-- Rajouter fixed-top à la class navbar pour remettre comme avant -->
+		<nav class="navbar navbar-expand-lg bg-white scrolling-navbar">
+			<div class="container">
+				<div class="navbar-header">
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+						<span class="lni-menu"></span>
+						<span class="lni-menu"></span>
+						<span class="lni-menu"></span>
+					</button>
+					<a href="{{ path('accueil') }}" class="navbar-brand"><img src="{{ asset('assets/img/logo2.png') }}" alt=""></a>
+				</div>
+				<div class="collapse navbar-collapse" id="main-navbar">
+					<ul class="navbar-nav mr-auto w-100 justify-content-center">
+						<li class="nav-item alsace active">
+							<a class="nav-link alsace-toggle" href="{{ path('accueil') }}">
+								ACCUEIL
+							</a>
+						</li>
+						{% if app.user %}
+							<li class="nav-item">
+								<a class="nav-link" href="{{ path('membre') }}">
+									Gérer mes annonces
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{{ path('historique') }}">
+									Mes recherches
+								</a>
+							</li>
+						{% endif %}
+						<li class="nav-item alsace">
+							<a class="nav-link alsace-toggle" href="about.html">
+								A Propos
+							</a>
+						<li class="nav-item">
+							<a class="nav-link" href="contact.html">
+								Contact
+							</a>
+						</li>
+					</ul>
+					<div class="post-btn">
+						<a class="btn btn-common" href="{{ path('ajoutAnnonce') }}"><i class="lni-pencil-alt"></i> Ajouter une annonce</a>
+					</div>
+				</div>
+			</div>
+
+			<ul class="mobile-menu">
+				<li>
+					<a class="active" href="{{ path('accueil') }}">
+						Accueil
+					</a>
+					<a href="{{ path('ajoutAnnonce') }}">Déposer une annonce</a>
+					<a href="about.html">A propos</a>
+					<a href="contact.html">Nous contacter</a>
+					{% if app.user %}
+						<a href="{{ path('membre') }}">Gérer mes annonces</a>
+						<a href="{{ path('historique') }}">Mes recherches</a>
+					{% else %}
+						<a href="{{ path('app_login') }}">Connexion</a>
+						<a href="{{ path('app_register') }}">Inscription</a>
+					{% endif %}
+				</li>
+			</ul>
+		</nav>
