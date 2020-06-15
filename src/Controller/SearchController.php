@@ -11,6 +11,7 @@ use App\Entity\User;
 use App\Repository\AnnoncesRepository;
 use App\Repository\CategoriesRepository;
 use App\Form\AnnoncesType;
+use Knp\Component\Pager\PaginatorInterface;
 
 class SearchController extends AbstractController
 {
@@ -63,7 +64,7 @@ class SearchController extends AbstractController
 	/**
      * @Route("/search", name="searchResult")
      */
-	public function searchResult(Request $request, AnnoncesRepository $annoncesRepository, CategoriesRepository $categoriesRepository){
+	public function searchResult(Request $request, AnnoncesRepository $annoncesRepository, CategoriesRepository $categoriesRepository, PaginatorInterface $paginator){
 		
 		$search = $request->query->get('search');
 		$categorie = $request->query->get('categorie');
@@ -111,8 +112,15 @@ class SearchController extends AbstractController
 				->getQuery()
 				->getResult();
 			//dd($res);
+		
+		$annonces = $paginator->paginate(
+            $res, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            6 // Nombre de résultats par page
+        );
+		
 		return $this->render('base/pages/searchAnnonce.html.twig',[
-			'res' => $res,
+			'res' => $annonces,
 			'cats' => $cats,
 			'villes' => $villes
 		]);
