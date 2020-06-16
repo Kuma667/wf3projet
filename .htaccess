@@ -1,0 +1,12 @@
+RewriteEngine On
+
+######## URL rewriting #########
+
+RewriteCond %{HTTPS} !=on
+RewriteRule ^(.*) https://%{SERVER_NAME}/$1 [R,L]
+
+RewriteCond %{REQUEST_URI} \..+$
+RewriteCond %{REQUEST_URI} !\.html$
+RewriteRule .* - [L]
+
+RewriteRule ^(.*)$ /index.php [QSA,L]

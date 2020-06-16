@@ -16,7 +16,7 @@ use Knp\Component\Pager\PaginatorInterface;
 class SearchController extends AbstractController
 {
     /**
-     * @Route("/accueil", name="accueil")
+     * @Route("/", name="accueil")
      */
     public function search(Request $request, AnnoncesRepository $annoncesRepository, CategoriesRepository $categoriesRepository)
     {

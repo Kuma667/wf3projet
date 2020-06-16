@@ -49,7 +49,11 @@
 										<a href="#"><i class="lni-map-marker"></i> {{ annonce.ville }}</a>
 									</span>
 								</div>
-								<p class="dsc" style="color: black"> {{ annonce.description }} </p>
+								{% if annonce.description|length > 30 %}
+									<p class="dsc" style="color: black"> {{ annonce.description[:30] }}... </p>
+								{% else %}
+									<p class="dsc" style="color: black"> {{ annonce.description }} </p>
+								{% endif %}
 								<div class="listing-bottom">
 									<h3 class="price float-left" style="margin-right:20px">{{ annonce.prix }}€</h3>
 									<a href="{{ path('annonceSingle', {id: annonce.id}) }}" class="btn btn-common float-right" style="float:right; background-color: #6550ff">Voir les détails</a>
@@ -97,6 +101,7 @@
 		</div>
 	</section>
 	
+<!--
 	<section class="testimonial section-padding">
 		<div class="container">
 			<div class="row">
@@ -138,5 +143,6 @@
 			</div>
 		</div>
 	</section>
+-->
 
 {% endblock %}

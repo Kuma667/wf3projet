@@ -40,28 +40,28 @@
 				</div>
 				<div class="collapse navbar-collapse" id="main-navbar">
 					<ul class="navbar-nav mr-auto w-100 justify-content-center">
-						<li class="nav-item alsace active">
+						<li class="nav-item alsace {{ ROUTE_NAME == 'accueil' ? 'active' }}">
 							<a class="nav-link alsace-toggle" href="{{ path('accueil') }}">
 								ACCUEIL
 							</a>
 						</li>
 						{% if app.user %}
-							<li class="nav-item">
+							<li class="nav-item {{ ROUTE_NAME == 'membre' ? 'active' }}">
 								<a class="nav-link" href="{{ path('membre') }}">
 									Gérer mes annonces
 								</a>
 							</li>
-							<li class="nav-item">
+							<li class="nav-item {{ ROUTE_NAME == 'historique' ? 'active' }}">
 								<a class="nav-link" href="{{ path('historique') }}">
 									Mes recherches
 								</a>
 							</li>
 						{% endif %}
-						<li class="nav-item alsace">
+						<li class="nav-item alsace {{ ROUTE_NAME == 'about' ? 'active' }}">
 							<a class="nav-link alsace-toggle" href="{{ path('about')}}">
 								A Propos
 							</a>
-						<li class="nav-item">
+						<li class="nav-item {{ ROUTE_NAME == 'contact' ? 'active' }}">
 							<a class="nav-link" href="{{ path('contact') }}">
 								Contact
 							</a>
@@ -75,18 +75,18 @@
 
 			<ul class="mobile-menu">
 				<li>
-					<a class="active" href="{{ path('accueil') }}">
+					<a class="{{ ROUTE_NAME == 'accueil' ? 'active' }}" href="{{ path('accueil') }}">
 						Accueil
 					</a>
-					<a href="{{ path('ajoutAnnonce') }}">Déposer une annonce</a>
-					<a href="{{ path('about')}}">A propos</a>
-					<a href="{{ path('contact') }}">Nous contacter</a>
+					<a class="{{ ROUTE_NAME == 'ajoutAnnonce' ? 'active' }}" href="{{ path('ajoutAnnonce') }}">Déposer une annonce</a>
+					<a class="{{ ROUTE_NAME == 'about' ? 'active' }}" href="{{ path('about')}}">A propos</a>
+					<a class="{{ ROUTE_NAME == 'contact' ? 'active' }}" href="{{ path('contact') }}">Nous contacter</a>
 					{% if app.user %}
-						<a href="{{ path('membre') }}">Gérer mes annonces</a>
-						<a href="{{ path('historique') }}">Mes recherches</a>
+						<a class="{{ ROUTE_NAME == 'membre' ? 'active' }}" href="{{ path('membre') }}">Gérer mes annonces</a>
+						<a class="{{ ROUTE_NAME == 'historique' ? 'active' }}" href="{{ path('historique') }}">Mes recherches</a>
 					{% else %}
-						<a href="{{ path('app_login') }}">Connexion</a>
-						<a href="{{ path('app_register') }}">Inscription</a>
+						<a class="{{ ROUTE_NAME == 'app_login' ? 'active' }}" href="{{ path('app_login') }}">Connexion</a>
+						<a class="{{ ROUTE_NAME == 'app_register' ? 'active' }}" href="{{ path('app_register') }}">Inscription</a>
 					{% endif %}
 				</li>
 			</ul>
